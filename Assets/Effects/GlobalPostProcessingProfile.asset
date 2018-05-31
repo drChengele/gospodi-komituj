@@ -11,4 +11,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6292b2c06870d4495f009f912b9600, type: 3}
   m_Name: GlobalPostProcessingProfile
   m_EditorClassIdentifier: 
-  settings: []
+  settings:
+  - {fileID: 114863485133623154}
+--- !u!114 &114863485133623154
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 801406613ab21684aa947c04f6f6a324, type: 3}
+  m_Name: Interlace
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  lineCount:
+    overrideState: 0
+    value: 128
+  multiplier:
+    overrideState: 0
+    value: 0.5
