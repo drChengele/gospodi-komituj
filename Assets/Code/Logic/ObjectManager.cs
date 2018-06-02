@@ -20,6 +20,7 @@ public class ObjectManager : MonoBehaviour, IObjectManager {
     [SerializeField] Camera cockpitCamera;
     [SerializeField] Camera worldCamera;
     [SerializeField] ShipSystems shipSystems;
+    [SerializeField] ShipReactor shipReactor;
 
     public IInertiaProvider InertiaSource => shipController;
     public JamShipController ShipController => shipController;
@@ -28,6 +29,7 @@ public class ObjectManager : MonoBehaviour, IObjectManager {
     public Camera PilotCamera => cockpitCamera;
     public Camera WorldCamera => worldCamera;
     public ShipSystems ShipSystems => shipSystems;
+    public ShipReactor ShipReactor => shipReactor;
 
     public static IObjectManager Instance { get; private set; }
 

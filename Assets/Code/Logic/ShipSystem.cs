@@ -18,15 +18,24 @@ public abstract class ShipSystem : MonoBehaviour {
     const float MinEnergy = 0f;
     const float MaxEnergy = 100f;
 
+    public float energyDepletionRate;
+
     public void TryChangeCurrentEnergy(float delta) {
         this.CurrentEnergy += delta;
         if (this.CurrentEnergy < MinEnergy && delta < 0f) { // tried to draw energy but could not
             OutOfEnergy();
+            this.CurrentEnergy = MinEnergy;
         }
 
         if (this.CurrentEnergy > MaxEnergy && delta > 0f) { // tried to fill energy but could 
             TooMuchEnergy();
+            this.CurrentEnergy = MaxEnergy;
         }
+    }
+
+    public virtual void DefaultEnergy(float energy)
+    {
+        this.CurrentEnergy = energy;
     }
 
     private void FixedUpdate() {

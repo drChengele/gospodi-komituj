@@ -7,7 +7,8 @@ public class ShipSystems : MonoBehaviour {
 
     public ShipEngine Engine { get; private set; }
     public LazzorBeam Weapon { get; private set; }
-    public ShipSystem Shield { get; private set; }
+    public Shield Shield { get; private set; }
+    public ShipReactor Reactor { get; private set; }
 
     private void Awake() {
         FindSystemsAndInitializeThem();
@@ -18,6 +19,8 @@ public class ShipSystems : MonoBehaviour {
         foreach (var system in allSystems) system.Initialize(this);
         Engine = allSystems.OfType<ShipEngine>().First();
         Weapon = allSystems.OfType<LazzorBeam>().First();
+        Reactor = allSystems.OfType<ShipReactor>().First();
+        Shield = allSystems.OfType<Shield>().First();
     }
 
     private void FixedUpdate() {
