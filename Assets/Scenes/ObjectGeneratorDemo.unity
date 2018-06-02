@@ -299,8 +299,8 @@ MonoBehaviour:
     - {fileID: 1977111840389726, guid: eb6fa28afac5e594ebee9073c89b956e, type: 2}
     - {fileID: 1904780595394844, guid: e4a61d103f62a884490217a5e7bfb4fc, type: 2}
     - {fileID: 1981687338200010, guid: fd5403efedefaa84abf52c767a29e51a, type: 2}
-    minScale: 0
-    maxScale: 0
+    minScale: 0.2
+    maxScale: 6
   volumeSize: {x: 50, y: 50, z: 50}
 --- !u!65 &1649222571
 BoxCollider:

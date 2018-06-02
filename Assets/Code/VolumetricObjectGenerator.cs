@@ -18,6 +18,8 @@ public class VolumetricObjectGenerator : MonoBehaviour {
 
     private Vector3 minCorner;
 
+    private SpawnParameters spawnParameters;
+
     // Use this for initialization
     void Start() {
 
@@ -42,13 +44,51 @@ public class VolumetricObjectGenerator : MonoBehaviour {
 
     void GenerateObject(SpawnerData data)
     {
+        
         var objectToSpawn = data.ObjectToSpawn();
+        var spnParams = CalculateSpawnParameters(data);
+        
+        for (int i = 0; i < 100; i++)
+        {
+            if (CheckSpawnability(objectToSpawn, spnParams.position, spnParams.rotation, spnParams.scale))
+            {
+                Instantiate(objectToSpawn, spnParams.position, spnParams.rotation);
+                objectToSpawn.transform.localScale = spnParams.scale;
+                break;
+            }
+            else
+            {
+                objectToSpawn = data.ObjectToSpawn();
+                spnParams = CalculateSpawnParameters(data);
+            }
+        }
+        
+        
+    }
 
-        var spawnPosition = new Vector3(transform.position.x + Random.Range(-volumeSize.x / 2, volumeSize.x / 2),
+    SpawnParameters CalculateSpawnParameters(SpawnerData data)
+    {
+        var parameters = new SpawnParameters();
+        parameters.position = new Vector3(transform.position.x + Random.Range(-volumeSize.x / 2, volumeSize.x / 2),
                                     transform.position.y + Random.Range(-volumeSize.y / 2, volumeSize.y / 2),
                                     transform.position.z + Random.Range(-volumeSize.z / 2, volumeSize.z / 2));
-        Instantiate(objectToSpawn, spawnPosition, Quaternion.Euler(Random.Range(0,360), Random.Range(0, 360), Random.Range(0, 360)));
-        objectToSpawn.transform.localScale = new Vector3(data.CalculateScale(), data.CalculateScale(), data.CalculateScale());
+        parameters.rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
+        parameters.scale = new Vector3(data.CalculateScale(), data.CalculateScale(), data.CalculateScale());
+
+        return parameters;
+    }
+
+    //treba da proveri overlap sa postojecim objektima na potencijalnom spawnu. Ako nema preklapanja spawn je ok, ako ima ona nije.
+    bool CheckSpawnability(GameObject obj, Vector3 pos, Quaternion rot, Vector3 scl) 
+    {
+        /*
+        var isValid = false;
+        var bounds = obj.GetComponent<Collider>().bounds;
+        Collider[] hitStuff = Physics.OverlapBox(pos, bounds.max * Mathf.Max(scl.x,scl.y,scl.z)/2, rot);
+        if (hitStuff.Length == 0) isValid = true;
+        return isValid;
+        */
+        return true;
     }
 
     [System.Serializable]
@@ -74,6 +114,20 @@ public class VolumetricObjectGenerator : MonoBehaviour {
         public float CalculateScale()
         {
             return Random.Range(minScale, maxScale);
+        }
+    }
+
+    public struct SpawnParameters
+    {
+        public Vector3 position;
+        public Quaternion rotation;
+        public Vector3 scale;
+
+        public SpawnParameters(Vector3 pos, Quaternion rot, Vector3 scl)
+        {
+            position = pos;
+            rotation = rot;
+            scale = scl;
         }
     }
 }
