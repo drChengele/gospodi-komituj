@@ -11,6 +11,9 @@ public class EngineeringController : MonoBehaviour {
 
     [SerializeField] Transform junkLayerRoot; // this is where tools and debris float
     [SerializeField] [Range(0f, 2f)] float retainShipInertia;
+    [SerializeField] LayerMask interactiveLayerMask;
+    [SerializeField] float maxObjectDragExtentsHorizontal;
+    [SerializeField] float maxObjectDragExtentsVertical;
 
     private void Update() {
         if (Input.GetMouseButtonDown(0)) {
@@ -34,16 +37,65 @@ public class EngineeringController : MonoBehaviour {
     }
 
     private void MouseHeld() {
+        if (grabbed != null) {
+            UpdatePositionOfGrabbed();
+            grabbed.OnHoldContinued();
+        }
         
     }
+
+    private void UpdatePositionOfGrabbed() {
+        // find intersection of current mouse ray with engineering junk layer plane 
+        var intersect = GetMouseIntersectionPointWithJunkPlane();
+
+        if (intersect != null && previousIntersectWithPlane != null) {
+            var delta = intersect.Value - previousIntersectWithPlane.Value;
+            var targetPosition = grabbed.transform.position + delta;
+            targetPosition = ConstrainTargetPositionToBeInsideTheJunkRectangle(targetPosition);
+            grabbed.Rigidbody.MovePosition(targetPosition);
+        }
+
+        previousIntersectWithPlane = intersect;
+
+    }
+
+    // so you don't drag outside the desired radius
+    Vector3 ConstrainTargetPositionToBeInsideTheJunkRectangle(Vector3 position) {
+        position.x = Mathf.Clamp(position.x, -maxObjectDragExtentsHorizontal, maxObjectDragExtentsHorizontal);
+        position.y = Mathf.Clamp(position.y, -maxObjectDragExtentsVertical, maxObjectDragExtentsVertical);
+        return position;
+    }
+
+    Vector3? GetMouseIntersectionPointWithJunkPlane() {
+        var plane = new Plane(-junkLayerRoot.forward, junkLayerRoot.position);
+        float where;
+        var ray = ObjectManager.Instance.EngineeringCamera.ScreenPointToRay(Input.mousePosition);
+        if (plane.Raycast(ray, out where)) {
+            return ray.origin + ray.direction * where;
+        }
+        return null;
+    }
+
+    Vector3? previousIntersectWithPlane;
 
     private void MouseReleased() {
-        
+        grabbed?.OnHoldReleased();
+        grabbed = null;
+        previousIntersectWithPlane = null;
     }
+
+    Grabbable grabbed;
 
     private void MouseHoldStarted() {
-        
+        var ray = ObjectManager.Instance.EngineeringCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hitinfo;
+        if (Physics.Raycast(ray, out hitinfo, 10f, interactiveLayerMask)) {
+            var interactive = hitinfo.rigidbody.gameObject.GetComponent<IEngineerInteractible>();
+            if (interactive != null) {
+                interactive.OnHoldStarted();
+                grabbed = interactive as Grabbable;
+            }
+        }
     }
-
 
 }
