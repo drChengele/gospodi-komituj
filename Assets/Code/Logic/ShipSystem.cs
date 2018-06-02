@@ -6,7 +6,7 @@ public abstract class ShipSystem : MonoBehaviour {
     public event Action<ShipSystem> SystemHasTooMuchEnergy;
     public event Action<ShipSystem> SystemIsOutOfEnergy;
 
-    public PilotController controller => myShip.pilotController;
+    public PilotController controller => ObjectManager.Instance.PilotController;
 
     public virtual void Initialize(ShipSystems myship) {
         myShip = myship;

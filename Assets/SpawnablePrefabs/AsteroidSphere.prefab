@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 135972457690184566}
   - component: {fileID: 114062492128958362}
   - component: {fileID: 54630596142455008}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: AsteroidSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1977111840389726}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.2665555, y: 4.7489953, z: 0.8993755}
+  m_LocalScale: {x: 4.9305806, y: 4.584177, z: 2.5894632}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -112,8 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5cfcbbba1de0da4e962b7fe04da155c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minRotationSpeed: 96
-  maxRotationSpeed: 444
+  minRotationSpeed: 0
+  maxRotationSpeed: 159
   maxHitPoints: 1
 --- !u!135 &135972457690184566
 SphereCollider:

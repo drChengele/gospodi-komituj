@@ -3,9 +3,6 @@ using System.Linq;
 using UnityEngine;
 
 public class ShipSystems : MonoBehaviour {
-    // assign in inspector
-    public PilotController pilotController;
-
     ShipSystem[] allSystems;
 
     public ShipEngine Engine { get; private set; }

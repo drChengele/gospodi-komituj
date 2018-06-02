@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class ShipEngine : ShipSystem {
     Vector2 currentSignal;
-    public JamShipController shipController;
 
-    public IEngineEffector EngineEffector => shipController;
+    public IEngineEffector EngineEffector => ObjectManager.Instance.ShipController;
 
     internal override void UpdateFrameLogic() {
         base.UpdateFrameLogic();
-        currentSignal = myShip.pilotController.thrusterSignal;
+        // just read the state of the thruster signal
+        currentSignal = ObjectManager.Instance.PilotController.thrusterSignal;
     }
 
     internal override void UpdateFixedLogic() {

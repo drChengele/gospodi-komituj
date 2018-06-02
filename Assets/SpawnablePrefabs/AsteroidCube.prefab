@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65691893497046318}
   - component: {fileID: 114914227147772288}
   - component: {fileID: 54054266524811476}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: AsteroidCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1904780595394844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.4071252, y: 1.7472532, z: 1.7435133}
+  m_LocalScale: {x: 2.5491054, y: 5.6183963, z: 1.4024794}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -124,6 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5cfcbbba1de0da4e962b7fe04da155c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minRotationSpeed: 250
-  maxRotationSpeed: 796
+  minRotationSpeed: 10
+  maxRotationSpeed: 90
   maxHitPoints: 1

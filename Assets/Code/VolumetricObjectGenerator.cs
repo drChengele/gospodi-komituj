@@ -14,6 +14,8 @@ public class VolumetricObjectGenerator : MonoBehaviour {
 
     public SpawnerData[] spawnerData;
 
+    public Transform placeObjectsHere;
+
     public Vector3 volumeSize;
 
     private Vector3 minCorner;
@@ -53,7 +55,9 @@ public class VolumetricObjectGenerator : MonoBehaviour {
             if (CheckSpawnability(objectToSpawn, spnParams.position, spnParams.rotation, spnParams.scale))
             {
                 Instantiate(objectToSpawn, spnParams.position, spnParams.rotation);
+                objectToSpawn.transform.parent = placeObjectsHere;
                 objectToSpawn.transform.localScale = spnParams.scale;
+                objectToSpawn.layer = gameObject.layer;
                 break;
             }
             else
