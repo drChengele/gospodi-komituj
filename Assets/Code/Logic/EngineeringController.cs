@@ -93,6 +93,21 @@ public class EngineeringController : MonoBehaviour {
             UpdatePositionOfGrabbed();
             grabbed.OnHoldContinued();
         }
+        else
+        {
+            var ray = ObjectManager.Instance.EngineeringCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hitinfo;
+            if (Physics.Raycast(ray, out hitinfo, 10f, interactiveLayerMask))
+            {
+                var interactive = hitinfo.collider.gameObject.GetComponent<IEngineerInteractible>() ?? hitinfo.rigidbody?.gameObject.GetComponent<IEngineerInteractible>();
+                var button = interactive as EngineeringButton;
+
+                if (button != null)
+                {
+                    button.OnHoldContinued();
+                }
+            }
+        }
     }
 
 }
