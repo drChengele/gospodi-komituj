@@ -29,6 +29,14 @@ public abstract class ShipSystem : MonoBehaviour {
         }
     }
 
+    private void FixedUpdate() {
+        UpdateFixedLogic();
+    }
+
+    private void Update() {
+        UpdateFrameLogic();
+    }
+
     protected virtual void TooMuchEnergy() {
         SystemHasTooMuchEnergy?.Invoke(this);
     }
@@ -37,5 +45,6 @@ public abstract class ShipSystem : MonoBehaviour {
         SystemIsOutOfEnergy?.Invoke(this);
     }
 
-    internal virtual void UpdateLogic() { }
+    internal virtual void UpdateFrameLogic() { }
+    internal virtual void UpdateFixedLogic() { }
 }
