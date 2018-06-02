@@ -1,7 +1,12 @@
 ﻿using System;
 using UnityEngine;
 
-public class JamShipController : MonoBehaviour, IEngineEffector {
+public interface IInertiaProvider {
+    Vector3 CurrentVelocity { get; }
+    Vector3 CurrentAccelerationRelative { get; }
+}
+
+public class JamShipController : MonoBehaviour, IEngineEffector, IInertiaProvider {
     public ShipSystems systems;
 
     [Range(0f, 10f)]
@@ -16,8 +21,11 @@ public class JamShipController : MonoBehaviour, IEngineEffector {
     public float inertiaRetain;
 
     public Vector3 CurrentVelocity => currentVelocity;
+    public Vector3 CurrentAccelerationRelative => activeAcceleration;
 
     Vector3 currentVelocity;
+
+    Vector3 activeAcceleration;
     
     void Update () {
         ApplyVelocity();
@@ -32,10 +40,11 @@ public class JamShipController : MonoBehaviour, IEngineEffector {
         currentVelocity.y *= inertiaRetain;
     }
 
+    
     public void ApplyThrust(Vector2 thrust) {
         thrust.Scale(new Vector2(thrustTransversal, thrustVertical));
-        Vector3 finalThrustAddPerSecond = thrust;
-        currentVelocity += finalThrustAddPerSecond * Time.fixedDeltaTime;
+        activeAcceleration = thrust;
+        currentVelocity += activeAcceleration * Time.fixedDeltaTime;
     }
 
     void ApplyVelocity() {
