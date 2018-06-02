@@ -32,18 +32,8 @@ public class EngineeringController : MonoBehaviour {
     private void ProcessJunkPhysics() {
         var allObjects = junkLayerRoot.GetComponentsInChildren<Grabbable>();
         var acceleration = ObjectManager.Instance.InertiaSource.CurrentAccelerationRelative * -retainShipInertia;
-
         foreach (var grabbable in allObjects) grabbable.Rigidbody.AddForce(acceleration * grabbable.receivedInertia, ForceMode.Acceleration);
     }
-
-    private void MouseHeld() {
-        if (grabbed != null) {
-            UpdatePositionOfGrabbed();
-            grabbed.OnHoldContinued();
-        }
-        
-    }
-
     private void UpdatePositionOfGrabbed() {
         // find intersection of current mouse ray with engineering junk layer plane 
         var intersect = GetMouseIntersectionPointWithJunkPlane();
@@ -90,11 +80,18 @@ public class EngineeringController : MonoBehaviour {
         var ray = ObjectManager.Instance.EngineeringCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitinfo;
         if (Physics.Raycast(ray, out hitinfo, 10f, interactiveLayerMask)) {
-            var interactive = hitinfo.rigidbody.gameObject.GetComponent<IEngineerInteractible>();
+            var interactive = hitinfo.collider.gameObject.GetComponent<IEngineerInteractible>() ?? hitinfo.rigidbody?.gameObject.GetComponent<IEngineerInteractible>();
             if (interactive != null) {
                 interactive.OnHoldStarted();
                 grabbed = interactive as Grabbable;
             }
+        }
+    }
+
+    private void MouseHeld() {
+        if (grabbed != null) {
+            UpdatePositionOfGrabbed();
+            grabbed.OnHoldContinued();
         }
     }
 
