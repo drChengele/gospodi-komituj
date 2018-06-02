@@ -78,17 +78,14 @@ public class VolumetricObjectGenerator : MonoBehaviour {
         return parameters;
     }
 
-    //treba da proveri overlap sa postojecim objektima na potencijalnom spawnu. Ako nema preklapanja spawn je ok, ako ima ona nije.
     bool CheckSpawnability(GameObject obj, Vector3 pos, Quaternion rot, Vector3 scl) 
     {
-        /*
+
         var isValid = false;
         var bounds = obj.GetComponent<Collider>().bounds;
-        Collider[] hitStuff = Physics.OverlapBox(pos, bounds.max * Mathf.Max(scl.x,scl.y,scl.z)/2, rot);
+        Collider[] hitStuff = Physics.OverlapSphere(pos, Vector3.Distance(bounds.max,bounds.min) * Mathf.Max(scl.x,scl.y,scl.z)/2);
         if (hitStuff.Length == 0) isValid = true;
-        return isValid;
-        */
-        return true;
+        return isValid; 
     }
 
     [System.Serializable]
