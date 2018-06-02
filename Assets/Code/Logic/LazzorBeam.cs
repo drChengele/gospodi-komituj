@@ -1,7 +1,7 @@
 ﻿public class LazzorBeam : ShipSystem {
 
-    internal override void UpdateLogic() {
-        base.UpdateLogic();
+    internal override void UpdateFrameLogic() {
+        base.UpdateFrameLogic();
     }
 
     public bool TryFire() {
