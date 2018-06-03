@@ -55,15 +55,15 @@ public class GameManager : MonoBehaviour {
     }
 
     internal void PanelBroken(PanelSystem panelSystem) {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     internal void PanelDestroyed(PanelSystem panelSystem) {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     internal void PanelMadeOperational(PanelSystem panelSystem) {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 }
 
