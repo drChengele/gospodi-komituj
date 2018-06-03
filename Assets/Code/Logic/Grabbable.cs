@@ -18,6 +18,7 @@ public class Grabbable : MonoBehaviour, IEngineerInteractible {
     [SerializeField] LayerMask layerMask;
     [SerializeField] public Transform rayOrigin;
     [SerializeField] Vector3 holdEuler;
+    [SerializeField] bool isCharger;
 
 
     public Rigidbody Rigidbody => GetComponent<Rigidbody>();
@@ -35,22 +36,28 @@ public class Grabbable : MonoBehaviour, IEngineerInteractible {
                 toolAligned = true;
             }
             Rigidbody.MoveRotation(Quaternion.Slerp(Rigidbody.transform.rotation, Quaternion.Euler(holdEuler), timeFraction));
-            if (toolAligned)
-            {
+            if (isCharger) {
                 var panelToCharge = GetPanelUnderneath();
                 panelToCharge?.ActivateCharging();
                 panelToCharge = null;
             }
+            
         }
     }
 
+    private void OnDrawGizmos() {
+        Gizmos.DrawRay(rayOrigin.position.normalized, rayOrigin.up);
+    }
+
     public PanelSystem GetPanelUnderneath() {
-        RaycastHit hit;
-        if (Physics.Raycast(rayOrigin.position, rayOrigin.up , out hit, 10f, layerMask)) {
-            //var panel = hit.collider.gameObject.GetComponent<PanelSystem>() ?? hit.rigidbody?.gameObject.GetComponent<PanelSystem>();
-            //return panel;
+        var all = Physics.RaycastAll(rayOrigin.position, rayOrigin.up, 10f, layerMask) ;
+
+        foreach (var hit in all) {
             var panel = hit.collider.transform.parent.gameObject.GetComponent<PanelSystem>();
-            return panel;
+            if (panel != null) {
+                Debug.Log($"Found panel {panel.name}");
+                return panel;
+            }
         }
         return null;
         
@@ -63,14 +70,28 @@ public class Grabbable : MonoBehaviour, IEngineerInteractible {
             var wire = GetComponent<WireBehaviour>();
             wire?.ProcessReleased();
         }
+        DisableAllParticles();
+    }
+
+    private void DisableAllParticles() {
+        var ps = GetComponentInChildren<ParticleSystem>();
+        if (ps != null) ps.Stop();
+    }
+
+    private void EnableAllParticles() {
+        var ps = GetComponentInChildren<ParticleSystem>();
+        if (ps != null) ps.Play();
     }
 
     public void OnHoldStarted() {
+        EnableAllParticles();
         Rigidbody.isKinematic = true;
     }
 
+
     private void Awake() {
         receivedInertia = UnityEngine.Random.Range(0.8f, 1.2f);
+        DisableAllParticles();
     }
 
     private void ResetToolData()

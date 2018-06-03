@@ -71,6 +71,7 @@ public class PanelSystem : ShipSystem , IEngineerInteractible {
         switch (currentDamageState)
         {
             case DamageState.Operational:
+                lamps.SetLevel(0f);
                 break;
             case DamageState.Malfunction:
                 lamps.SetLevel(CurrentEnergy / 100f);
@@ -115,6 +116,7 @@ public class PanelSystem : ShipSystem , IEngineerInteractible {
         if (IsFullyRepaired()) {
             ChangeDamageState(DamageState.Operational);
         }
+        Destroy(wire.gameObject);
     }
 
     public void ChangeDamageState(DamageState nextState) {
@@ -185,7 +187,10 @@ public class PanelSystem : ShipSystem , IEngineerInteractible {
         }
 
         if (currentDamageState == DamageState.Malfunction) {
-            SpawnObjectInWireSlot(wireSlot, ObjectManager.Instance.WireSpawner.wirePrefabInSituMalfunction);
+            SpawnObjectInWireSlot(wireSlot, 
+                wireSlot.occupied ?  
+                ObjectManager.Instance.WireSpawner.wirePrefabInSituFull :
+                ObjectManager.Instance.WireSpawner.wirePrefabInSituMalfunction);
         }
     }
 
