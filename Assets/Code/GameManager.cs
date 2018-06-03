@@ -29,7 +29,8 @@ public class GameManager : MonoBehaviour {
     }
 
     internal void ShipPickedUpCanister(Canister canister) {
-        
+        ObjectManager.Instance.WireSpawner.SpawnWire(canister.wireType);
+        canister.gameObject.SetActive(false); // maintainer will destroy it later, just hide it for now
     }
 }
 

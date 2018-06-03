@@ -48,7 +48,7 @@ public class EngineeringController : MonoBehaviour {
 
         if (intersect != null && previousIntersectWithPlane != null) {
             var delta = intersect.Value - previousIntersectWithPlane.Value;
-            var targetPosition = grabbed.transform.position + delta;
+            var targetPosition = intersect.Value;
             targetPosition = ConstrainTargetPositionToBeInsideTheJunkRectangle(targetPosition);
             grabbed.Rigidbody.MovePosition(targetPosition);
         }
@@ -65,7 +65,7 @@ public class EngineeringController : MonoBehaviour {
     }
 
     Vector3? GetMouseIntersectionPointWithJunkPlane() {
-        var plane = new Plane(-junkLayerRoot.forward, junkLayerRoot.position);
+        var plane = new Plane(-junkLayerRoot.forward, junkLayerRoot.position );
         float where;
         var ray = ObjectManager.Instance.EngineeringCamera.ScreenPointToRay(Input.mousePosition);
         if (plane.Raycast(ray, out where)) {

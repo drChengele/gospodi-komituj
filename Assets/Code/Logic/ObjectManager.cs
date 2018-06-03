@@ -11,6 +11,7 @@ public interface IObjectManager {
     ShipSystems ShipSystems { get;  }
     GameManager GameManager { get; }
     CockpitEffectsManager CockpitEffects { get; }
+    WireSpawner WireSpawner { get; }
 }
 
 
@@ -25,6 +26,7 @@ public class ObjectManager : MonoBehaviour, IObjectManager {
     [SerializeField] ShipReactor shipReactor;
     [SerializeField] GameManager gameManager;
     [SerializeField] CockpitEffectsManager cockpitEffects;
+    [SerializeField] WireSpawner wireSpawner;
 
     public IInertiaProvider InertiaSource => shipController;
     public JamShipController ShipController => shipController;
@@ -36,6 +38,7 @@ public class ObjectManager : MonoBehaviour, IObjectManager {
     public ShipReactor ShipReactor => shipReactor;
     public GameManager GameManager => gameManager;
     public CockpitEffectsManager CockpitEffects => cockpitEffects;
+    public WireSpawner WireSpawner => wireSpawner;
 
     public static IObjectManager Instance { get; private set; }
 
