@@ -5,8 +5,14 @@ using UnityEngine;
 public class Shield : ShipSystem {
 
     bool shieldActive = false;
+    [SerializeField] PilotController pilotController;
+    [SerializeField] GameObject shieldVisuals;
+    [SerializeField] float minInvulnerabilityTime;
+    float shieldUpTime;
+    public bool isInvulnerable = false;
 
     // Use this for initialization
+    
 
     void Update()
     {
@@ -17,22 +23,21 @@ public class Shield : ShipSystem {
             //ako je input za stit dat
             TryActivateShield();
         }
+        Debug.Log(isInvulnerable);
     }
 
     void TryActivateShield()
     {
         var energyCost = this.energyDepletionRate * Time.deltaTime;
-        if (!shieldActive && this.CurrentEnergy >= energyCost)
+        if (pilotController.shieldSignal && !shieldActive && this.CurrentEnergy >= energyCost)
         {
-            this.TryChangeCurrentEnergy(energyCost);
             TurnOnProtection();
         }
-        else
+        else 
         {
-            //inform pilot to inform engi to gib powa to shield
+            Debug.Log("turn off shield");
+            DeactivateShield();
         }
-
-
     }
 
     void TurnOnProtection()
@@ -45,21 +50,23 @@ public class Shield : ShipSystem {
     void KeepShieldUp()
     {
         var energyCost = this.energyDepletionRate * Time.deltaTime;
-        if (this.CurrentEnergy >= energyCost)
+        this.TryChangeCurrentEnergy(-energyCost);
+        if (CurrentEnergy == 0f || !pilotController.shieldSignal) DeactivateShield();
+        else shieldUpTime += Time.deltaTime;
+
+        if (shieldActive && shieldUpTime >= minInvulnerabilityTime)
         {
-            this.TryChangeCurrentEnergy(energyCost);
-        }
-        else
-        {
-            DeactivateShield();
+            isInvulnerable = true;
+            if (!shieldVisuals.activeInHierarchy) shieldVisuals.SetActive(true);
         }
     }
 
     void DeactivateShield()
     {
-        //turn off shield
         shieldActive = false;
-        //Debug.Log("Ship is no longer protected");
+        isInvulnerable = false;
+        shieldUpTime = 0f;
+        shieldVisuals.SetActive(false);
     }
 
 }

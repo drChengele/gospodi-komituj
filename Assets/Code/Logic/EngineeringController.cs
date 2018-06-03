@@ -35,7 +35,7 @@ public class EngineeringController : MonoBehaviour {
         foreach (var grabbable in allObjects) grabbable.Rigidbody.AddForce(acceleration * grabbable.receivedInertia, ForceMode.Acceleration);
         foreach (var grabbable in allObjects) ApplyCoriolis(grabbable.Rigidbody, ObjectManager.Instance.InertiaSource.CurrentRollSpeed);
     }
-
+    
     private void ApplyCoriolis(Rigidbody rigidbody, float currentRollSpeed) {
         // todo: 
         // find appropriate tangent speed based on location in engineering compartment 
