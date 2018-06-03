@@ -62,7 +62,12 @@ ModelImporter:
     4300018: Alat009
     4300020: pliers_model_pliers_bottom
     2186277476908879412: ImportLogs
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Alat
+    second: {fileID: 2100000, guid: 63ef4fb13519c4041819c9f9de9504b5, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
