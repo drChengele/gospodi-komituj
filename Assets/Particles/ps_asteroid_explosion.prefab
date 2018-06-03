@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4985154527364102}
   - component: {fileID: 198618513250188280}
   - component: {fileID: 199948768655512838}
-  m_Layer: 21
+  m_Layer: 22
   m_Name: ps_asteroid_explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4020079261196168}
   - component: {fileID: 198235677085134002}
   - component: {fileID: 199391725754995036}
-  m_Layer: 21
+  m_Layer: 22
   m_Name: ps_debrees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4982124469209020}
   - component: {fileID: 198866333491541300}
   - component: {fileID: 199219504627044242}
-  m_Layer: 21
+  m_Layer: 22
   m_Name: ps_asteroid_explosion_fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}

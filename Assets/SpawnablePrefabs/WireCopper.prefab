@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33011008025787204}
   - component: {fileID: 23427195891404740}
   - component: {fileID: 114134933017033316}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: WireCopper
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4949408455208296}
   - component: {fileID: 198532441335467940}
   - component: {fileID: 199971107452924502}
-  m_Layer: 21
+  m_Layer: 20
   m_Name: ps_vire_sparking
   m_TagString: Untagged
   m_Icon: {fileID: 0}

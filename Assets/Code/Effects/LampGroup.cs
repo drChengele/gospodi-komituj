@@ -11,7 +11,7 @@ public class LampGroup : MonoBehaviour {
     public Color lightColor;
 
     public void SetLevel(float zeroToOne) {
-        var lastLamp = Mathf.RoundToInt( zeroToOne * lamps.Length);
+        var lastLamp = Mathf.RoundToInt( zeroToOne * lamps.Length) - 1;
         for (var i = 0; i < lamps.Length; i++) {
             lamps[i].GetComponent<MeshRenderer>().material.color = (i <= lastLamp) ? lightColor : noLightColor;
         }

@@ -14,12 +14,15 @@ public class WireSpawner : MonoBehaviour {
     [SerializeField] public GameObject wirePrefabInSituMalfunction;
     [SerializeField] public GameObject wirePrefabInSituDestroyed;
 
+    public Material GetMaterialFor(WireType type) {
+        return materials[(int)type];
+    }
 
     public void SpawnWire(WireType wType)
     {
         klapna.SetTrigger("Open");
         var go = (GameObject)Instantiate(wire, spawnOrigin.position, Quaternion.identity, wireParent);
         go.GetComponent<WireBehaviour>().wType = wType;
-        go.GetComponent<MeshRenderer>().material = materials[(int)wType];
+        go.GetComponent<MeshRenderer>().material = GetMaterialFor(wType);
     }
 }

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4383306570913788}
   - component: {fileID: 198910470743495556}
   - component: {fileID: 199547349148500596}
-  m_Layer: 21
+  m_Layer: 20
   m_Name: ps_smoke_explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4662278260808344}
   - component: {fileID: 198845635595943482}
   - component: {fileID: 199505993321684542}
-  m_Layer: 21
+  m_Layer: 20
   m_Name: ps_smoke_spark
   m_TagString: Untagged
   m_Icon: {fileID: 0}

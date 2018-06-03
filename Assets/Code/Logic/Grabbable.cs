@@ -46,8 +46,10 @@ public class Grabbable : MonoBehaviour, IEngineerInteractible {
 
     public PanelSystem GetPanelUnderneath() {
         RaycastHit hit;
-        if (Physics.Raycast(rayOrigin.position, rayOrigin.up * 10f, out hit, layerMask)) {
-            var panel = hit.collider.gameObject.GetComponent<PanelSystem>() ?? hit.rigidbody?.gameObject.GetComponent<PanelSystem>();
+        if (Physics.Raycast(rayOrigin.position, rayOrigin.up , out hit, 10f, layerMask)) {
+            //var panel = hit.collider.gameObject.GetComponent<PanelSystem>() ?? hit.rigidbody?.gameObject.GetComponent<PanelSystem>();
+            //return panel;
+            var panel = hit.collider.transform.parent.gameObject.GetComponent<PanelSystem>();
             return panel;
         }
         return null;

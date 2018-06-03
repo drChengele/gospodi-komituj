@@ -12,12 +12,13 @@ public enum DamageState {
 
 public class PanelSystem : ShipSystem , IEngineerInteractible {
 
-    [SerializeField] float rechargeRate;
     bool isCharging = false;
     public bool isPanel = true;
 
+    [SerializeField] float rechargeRate;
     [SerializeField] DamageState currentDamageState;
     [SerializeField] Transform[] wireRoots;
+    [SerializeField] LampGroup lamps;
 
     public DamageState CurrentDamageState => currentDamageState;
 
@@ -38,6 +39,7 @@ public class PanelSystem : ShipSystem , IEngineerInteractible {
     private void Awake()
     {
         this.DefaultEnergy(50f);
+        lamps.SetLevel(0f);
         //if (currentDamageState == null) currentDamageState = DamageState.Operational;
     }
 
@@ -66,22 +68,29 @@ public class PanelSystem : ShipSystem , IEngineerInteractible {
 
     private void Update()
     {
-
         switch (currentDamageState)
         {
             case DamageState.Operational:
                 break;
             case DamageState.Malfunction:
+                lamps.SetLevel(CurrentEnergy / 100f);
                 DepletePanel();
                 ChargePanel(isCharging);
                 DeactivateCharging();
-                Debug.Log(this.CurrentEnergy);
+                if (CurrentEnergy < float.Epsilon || CurrentEnergy > MaxEnergy - float.Epsilon) {
+                    ShortCircuit();
+                }
                 break;
             case DamageState.Destroyed:
                 break;
             default:
                 break;
         }
+    }
+
+    private void ShortCircuit() {
+        //ObjectManager.Instance.GameManager
+        ChangeDamageState(DamageState.Destroyed);
     }
 
     public void OnHoldStarted()
@@ -113,14 +122,17 @@ public class PanelSystem : ShipSystem , IEngineerInteractible {
         if (nextState == currentDamageState) 
             return;
 
+        currentDamageState = nextState;
+
         if (nextState == DamageState.Malfunction) {
             ObjectManager.Instance.GameManager.PanelBroken(this);
-            GenerateWireSlots();
+            RegenerateWireSlots();
             OpenGate();
         } 
 
         if (nextState == DamageState.Destroyed) {
             ObjectManager.Instance.GameManager.PanelDestroyed(this);
+            RegenerateWireSlots();
         }
 
         if (nextState == DamageState.Operational) {
@@ -128,7 +140,6 @@ public class PanelSystem : ShipSystem , IEngineerInteractible {
             CloseGate();
         }
 
-        currentDamageState = nextState;
     }
 
     private void CloseGate() {
@@ -152,7 +163,7 @@ public class PanelSystem : ShipSystem , IEngineerInteractible {
                 .Where(slot => !slot.occupied)
                 .FirstOrDefault(slot => slot.wire == wire.wType);
 
-    void GenerateWireSlots() {
+    void RegenerateWireSlots() {
         if(wireSlots != null) foreach (var slot in wireSlots) DeleteWireVisuals(slot.index);
 
         wireSlots = new WireSlot[3];
@@ -183,7 +194,8 @@ public class PanelSystem : ShipSystem , IEngineerInteractible {
         wireGO.transform.parent = wireRoots[wireSlot.index];
         wireGO.transform.localPosition = Vector3.zero;
         wireGO.transform.localRotation = Quaternion.identity;
-        wireGO.GetComponent<WireColorizer>().SetWireColor(wireSlot.wire);
+        wireGO.GetComponent<WireColorizer>()?.SetWireColor(wireSlot.wire);
+        foreach (var cc in wireGO.GetComponentsInChildren<WireColorizer>()) cc.SetWireColor(wireSlot.wire);
     }
 
     private void DeleteWireVisuals(int index) {

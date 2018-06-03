@@ -6,7 +6,7 @@ public class EngineeringButton : MonoBehaviour, IEngineerInteractible {
     [SerializeField] WutDuzDisBUttonDo buttonFunction;
 
     [SerializeField] float rechargeEnergyRate;
-    [SerializeField] float rechargeHeatRate;
+    //[SerializeField] float rechargeHeatRate;
 
     float initialZ;
     float targetZ;
@@ -33,18 +33,18 @@ public class EngineeringButton : MonoBehaviour, IEngineerInteractible {
 
             case WutDuzDisBUttonDo.ChargeShields:
                 ObjectManager.Instance.ShipSystems.Shield.TryChangeCurrentEnergy(ContineousRecharging(rechargeEnergyRate));
-                ObjectManager.Instance.ShipSystems.Reactor.TryChangeCurrentEnergy(ContineousRecharging(rechargeHeatRate));
+                //ObjectManager.Instance.ShipSystems.Reactor.TryChangeCurrentEnergy(ContineousRecharging(rechargeHeatRate));
                 break;
             case WutDuzDisBUttonDo.ChargeWeapon:
                 ObjectManager.Instance.ShipSystems.Weapon.TryChangeCurrentEnergy(ContineousRecharging(rechargeEnergyRate));
-                ObjectManager.Instance.ShipSystems.Reactor.TryChangeCurrentEnergy(ContineousRecharging(rechargeHeatRate));
+                //ObjectManager.Instance.ShipSystems.Reactor.TryChangeCurrentEnergy(ContineousRecharging(rechargeHeatRate));
                 break;
             case WutDuzDisBUttonDo.ChargeEngine:
                 ObjectManager.Instance.ShipSystems.Engine.TryChangeCurrentEnergy(ContineousRecharging(rechargeEnergyRate));
-                ObjectManager.Instance.ShipSystems.Reactor.TryChangeCurrentEnergy(ContineousRecharging(rechargeHeatRate));
+                //ObjectManager.Instance.ShipSystems.Reactor.TryChangeCurrentEnergy(ContineousRecharging(rechargeHeatRate));
                 break;
             case WutDuzDisBUttonDo.CoolReactor:
-                ObjectManager.Instance.ShipSystems.Reactor.TryChangeCurrentEnergy(ContineousRecharging(rechargeEnergyRate));
+                //ObjectManager.Instance.ShipSystems.Reactor.TryChangeCurrentEnergy(ContineousRecharging(rechargeEnergyRate));
                 break;
             default:
                 break;
@@ -65,15 +65,15 @@ public class EngineeringButton : MonoBehaviour, IEngineerInteractible {
 
             case WutDuzDisBUttonDo.ChargeShields:
                 ObjectManager.Instance.ShipSystems.Shield.TryChangeCurrentEnergy(ContineousRecharging(rechargeEnergyRate));
-                ObjectManager.Instance.ShipSystems.Reactor.TryChangeCurrentEnergy(ContineousRecharging(rechargeHeatRate));
+                //ObjectManager.Instance.ShipSystems.Reactor.TryChangeCurrentEnergy(ContineousRecharging(rechargeHeatRate));
                 break;
             case WutDuzDisBUttonDo.ChargeWeapon:
                 ObjectManager.Instance.ShipSystems.Weapon.TryChangeCurrentEnergy(ContineousRecharging(rechargeEnergyRate));
-                ObjectManager.Instance.ShipSystems.Reactor.TryChangeCurrentEnergy(ContineousRecharging(rechargeHeatRate));
+                //ObjectManager.Instance.ShipSystems.Reactor.TryChangeCurrentEnergy(ContineousRecharging(rechargeHeatRate));
                 break;
             case WutDuzDisBUttonDo.ChargeEngine:
                 ObjectManager.Instance.ShipSystems.Engine.TryChangeCurrentEnergy(ContineousRecharging(rechargeEnergyRate));
-                ObjectManager.Instance.ShipSystems.Reactor.TryChangeCurrentEnergy(ContineousRecharging(rechargeHeatRate));
+                //ObjectManager.Instance.ShipSystems.Reactor.TryChangeCurrentEnergy(ContineousRecharging(rechargeHeatRate));
                 break;
             case WutDuzDisBUttonDo.CoolReactor:
                 ObjectManager.Instance.ShipSystems.Reactor.TryChangeCurrentEnergy(ContineousRecharging(rechargeEnergyRate));

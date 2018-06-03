@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33995721642593474}
   - component: {fileID: 23255228173738026}
   - component: {fileID: 114244658835271024}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: WireWhole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ Transform:
   m_GameObject: {fileID: 1648586163684268}
   m_LocalRotation: {x: 0.00000008146034, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.5438915, y: 0.13820358, z: 0.000000008018046}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0

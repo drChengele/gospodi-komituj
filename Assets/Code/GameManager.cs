@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log("ASTEROID HIT BY BULLIT");
         asteroid.SetActive(false);
         bullet.DieSoon();
-        //Instantiate(ObjectManager.Instance.Prefabs.asteroidExplosion, bullet.transform.position, Quaternion.identity);
+        Instantiate(ObjectManager.Instance.Prefabs.particles_asteroidExplosion, bullet.transform.position, Quaternion.identity);
     }
 
     internal void CanisterWasHitByBullet(Bullet bullet, GameObject canister) {
@@ -62,11 +62,11 @@ public class GameManager : MonoBehaviour {
     }
 
     internal void PanelDestroyed(PanelSystem panelSystem) {
-        throw new NotImplementedException();
+        Instantiate(ObjectManager.Instance.Prefabs.particles_smoke, panelSystem.transform.position, Quaternion.identity);
     }
 
     internal void PanelMadeOperational(PanelSystem panelSystem) {
-        throw new NotImplementedException();
+        
     }
 
     // make something go wrong

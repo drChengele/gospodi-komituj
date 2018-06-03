@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4852357337879366}
   - component: {fileID: 198376910226620052}
   - component: {fileID: 199162077738020526}
-  m_Layer: 21
+  m_Layer: 20
   m_Name: ps_repairing_light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4444190867888828}
   - component: {fileID: 198501085859421690}
   - component: {fileID: 199992154552335062}
-  m_Layer: 21
+  m_Layer: 20
   m_Name: ps_sparks_repairing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

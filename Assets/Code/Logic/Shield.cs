@@ -23,7 +23,6 @@ public class Shield : ShipSystem {
             //ako je input za stit dat
             TryActivateShield();
         }
-        Debug.Log(isInvulnerable);
     }
 
     void TryActivateShield()
@@ -35,7 +34,6 @@ public class Shield : ShipSystem {
         }
         else 
         {
-            Debug.Log("turn off shield");
             DeactivateShield();
         }
     }

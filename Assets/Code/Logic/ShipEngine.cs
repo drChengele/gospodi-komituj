@@ -20,8 +20,13 @@ public class ShipEngine : ShipSystem {
     }
 
     void ApplySignalToThrusters() {
-        EngineEffector.ApplyThrust(thrustSignal);
-        EngineEffector.ApplyRoll(rollSignal);
+        float expenditure = thrustSignal.magnitude + Mathf.Abs(rollSignal) * 0.5f;
+        if (expenditure > 1f) expenditure = 1f;
+        TryChangeCurrentEnergy(-expenditure * energyDepletionRate * Time.deltaTime);
+        if (CurrentEnergy > float.Epsilon) {
+            EngineEffector.ApplyThrust(thrustSignal);
+            EngineEffector.ApplyRoll(rollSignal);
+        }
     }
 }
 
