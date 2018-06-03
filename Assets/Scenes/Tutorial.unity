@@ -815,7 +815,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '-repair ship as systems fail-
 
-    use WIRES and SHOCK TOOL'
+    use WIRES and ELECTRO TOOL'
 --- !u!222 &885063184
 CanvasRenderer:
   m_ObjectHideFlags: 0
