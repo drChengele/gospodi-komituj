@@ -33,7 +33,15 @@ public class EngineeringController : MonoBehaviour {
         var allObjects = junkLayerRoot.GetComponentsInChildren<Grabbable>();
         var acceleration = ObjectManager.Instance.InertiaSource.CurrentAccelerationRelativeZeroToOne * -shipInertiaModifier;
         foreach (var grabbable in allObjects) grabbable.Rigidbody.AddForce(acceleration * grabbable.receivedInertia, ForceMode.Acceleration);
+        foreach (var grabbable in allObjects) ApplyCoriolis(grabbable.Rigidbody, ObjectManager.Instance.InertiaSource.CurrentRollSpeed);
     }
+
+    private void ApplyCoriolis(Rigidbody rigidbody, float currentRollSpeed) {
+        // todo: 
+        // find appropriate tangent speed based on location in engineering compartment 
+        // apply this to rigidbody using AddForce(..., ForceMode.Acceleration);
+    }
+
     private void UpdatePositionOfGrabbed() {
         // find intersection of current mouse ray with engineering junk layer plane 
         var intersect = GetMouseIntersectionPointWithJunkPlane();

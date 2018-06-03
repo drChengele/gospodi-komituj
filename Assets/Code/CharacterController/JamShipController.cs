@@ -5,6 +5,7 @@ public interface IInertiaProvider {
     Vector3 CurrentVelocity { get; }
     Vector3 CurrentAccelerationRelative { get; }
     Vector3 CurrentAccelerationRelativeZeroToOne { get; }
+    float   CurrentRollSpeed { get; }
 }
 
 public class JamShipController : MonoBehaviour, IEngineEffector, IInertiaProvider {
@@ -24,6 +25,8 @@ public class JamShipController : MonoBehaviour, IEngineEffector, IInertiaProvide
     public Vector3 CurrentVelocity => currentVelocity;
     public Vector3 CurrentAccelerationRelative => activeAcceleration;
     public Vector3 CurrentAccelerationRelativeZeroToOne => activeAccelNormalized;
+
+    public float CurrentRollSpeed => currentRoll;
 
     Vector3 currentVelocity;
     Vector3 activeAcceleration;
