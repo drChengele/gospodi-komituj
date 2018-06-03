@@ -32,6 +32,8 @@ public class ShipMilageManager : MonoBehaviour {
         }
 	}
 
+    public float remaining => goalMileage - mileage;
+
     void ResolveGoalReached()
     {
         //kill ship movement cus i have the power.

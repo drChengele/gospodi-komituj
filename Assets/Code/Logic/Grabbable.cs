@@ -45,11 +45,9 @@ public class Grabbable : MonoBehaviour, IEngineerInteractible {
         }
     }
 
-    private void OnDrawGizmos() {
-        Gizmos.DrawRay(rayOrigin.position.normalized, rayOrigin.up);
-    }
-
     public PanelSystem GetPanelUnderneath() {
+        if (rayOrigin == null)
+            return null;
         var all = Physics.RaycastAll(rayOrigin.position, rayOrigin.up, 10f, layerMask) ;
 
         foreach (var hit in all) {
