@@ -268,9 +268,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipController: {fileID: 823081975}
+  pilotController: {fileID: 0}
   engineeringCamera: {fileID: 13591582}
   cockpitCamera: {fileID: 282840813}
   worldCamera: {fileID: 521573137}
+  shipSystems: {fileID: 0}
+  shipReactor: {fileID: 0}
+  gameManager: {fileID: 0}
+  cockpitEffects: {fileID: 0}
+  wireSpawner: {fileID: 0}
 --- !u!4 &36101866
 Transform:
   m_ObjectHideFlags: 0
@@ -329,7 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   junkLayerRoot: {fileID: 1984301221}
-  retainShipInertia: 0.4
+  shipInertiaModifier: 0
   interactiveLayerMask:
     serializedVersion: 2
     m_Bits: 32768
@@ -364,6 +370,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &226521855
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1008361646}
+    m_Modifications:
+    - target: {fileID: 4985154527364102, guid: e53cb074a4ef2c04da63cf7848fb01fd, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985154527364102, guid: e53cb074a4ef2c04da63cf7848fb01fd, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985154527364102, guid: e53cb074a4ef2c04da63cf7848fb01fd, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.223
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985154527364102, guid: e53cb074a4ef2c04da63cf7848fb01fd, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985154527364102, guid: e53cb074a4ef2c04da63cf7848fb01fd, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985154527364102, guid: e53cb074a4ef2c04da63cf7848fb01fd, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985154527364102, guid: e53cb074a4ef2c04da63cf7848fb01fd, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985154527364102, guid: e53cb074a4ef2c04da63cf7848fb01fd, type: 2}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e53cb074a4ef2c04da63cf7848fb01fd, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &233018305
 GameObject:
   m_ObjectHideFlags: 0
@@ -5598,6 +5646,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ff9d18486eeb54692a8920e72f81fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTool: 0
+  rotationTime: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  rayOrigin: {fileID: 0}
 --- !u!1 &521573134
 GameObject:
   m_ObjectHideFlags: 0
@@ -5876,8 +5930,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   systems: {fileID: 906935813}
-  thrustVertical: 5
-  thrustTransversal: 5
+  thrustPower: 0
+  rollPower: 0
   forwardSpeed: 5
   inertiaRetain: 0.96
 --- !u!1 &906935811
@@ -5923,7 +5977,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 512df74140f72ea47aedd91a3189c4db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pilotController: {fileID: 1323623291}
 --- !u!1 &962625538
 GameObject:
   m_ObjectHideFlags: 0
@@ -5981,6 +6034,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ff9d18486eeb54692a8920e72f81fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTool: 0
+  rotationTime: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  rayOrigin: {fileID: 0}
 --- !u!1 &1008361645
 GameObject:
   m_ObjectHideFlags: 0
@@ -6018,6 +6077,7 @@ Transform:
   - {fileID: 449957849}
   - {fileID: 1858822100}
   - {fileID: 1152849378}
+  - {fileID: 1059961903}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6165,6 +6225,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ff9d18486eeb54692a8920e72f81fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTool: 0
+  rotationTime: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  rayOrigin: {fileID: 0}
+--- !u!4 &1059961903 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4985154527364102, guid: e53cb074a4ef2c04da63cf7848fb01fd,
+    type: 2}
+  m_PrefabInternal: {fileID: 226521855}
 --- !u!4 &1087628529 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4444190867888828, guid: cf4ca513d356fee41ac4f771d06bdf3b,
@@ -6429,6 +6500,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ff9d18486eeb54692a8920e72f81fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTool: 0
+  rotationTime: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  rayOrigin: {fileID: 0}
 --- !u!1 &1323623290
 GameObject:
   m_ObjectHideFlags: 0
@@ -7224,7 +7301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09ddc802f108b04cb7d0e4dd415bd9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipController: {fileID: 823081975}
+  energyDepletionRate: 0
 --- !u!4 &1757120074 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4574654526846786, guid: 0d3c13a23d17a544d8c81728dbe67785,
@@ -12018,6 +12095,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ff9d18486eeb54692a8920e72f81fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTool: 0
+  rotationTime: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  rayOrigin: {fileID: 0}
 --- !u!1 &1974103857
 GameObject:
   m_ObjectHideFlags: 0
@@ -12132,6 +12215,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af6d8922cb578f48b27e05cedbe66d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  energyDepletionRate: 0
+  prefab: {fileID: 0}
+  fireRate: 0
+  apertureDegrees: 0
+  tubeRandomOffset: 0
+  bulletSpawnPoints: []
 --- !u!1 &2097642000
 GameObject:
   m_ObjectHideFlags: 0

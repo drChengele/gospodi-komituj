@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,8 +37,15 @@ public class WireBehaviour : MonoBehaviour {
         }
     }
 
-    void MoveToZeroPlane()
-    {
+    void MoveToZeroPlane() {
         transform.localPosition = Vector3.SmoothDamp(transform.localPosition, targetPos, ref vel, dampFactor);
+    }
+
+    internal void ProcessReleased() {
+        var g = GetComponent<Grabbable>();
+        var panel = g.GetPanelUnderneath();
+        if (panel != null) {
+            ObjectManager.Instance.GameManager.AttemptedWireSlotting(this, panel);
+        }
     }
 }

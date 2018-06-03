@@ -147,7 +147,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1081344
-  rayOrigin: {fileID: 0}
+  rayOrigin: {fileID: 4007464926683634}
 --- !u!114 &114977637272458162
 MonoBehaviour:
   m_ObjectHideFlags: 1

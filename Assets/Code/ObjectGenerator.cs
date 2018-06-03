@@ -16,15 +16,24 @@ public class ObjectGenerator : MonoBehaviour {
     [SerializeField] float volumeHalfWidth;
     [SerializeField] float sliceDepth;
 
+
     [SerializeField] GameObject[] createWhat;
     [SerializeField] float scaleVariance;
     [SerializeField] float density; // per 100 unit of depth
 
     [SerializeField] int maxSpawnsPerFrame;
 
+    [SerializeField] int minSlicesForCanister;
+    [SerializeField] int maxSlicesForCanister;
+
+    [SerializeField] GameObject canisterPrefab;
+    [SerializeField] float canisterSpawnRadius;
+
     float maxGeneratedDepth; // last depth where stuff was generated
 
     float ShipProgress => solipsist.transform.position.z;
+
+    int slicesTilCanister = 0;
 
     private void Awake() {
         FirstGeneration();
@@ -37,10 +46,31 @@ public class ObjectGenerator : MonoBehaviour {
 
     private void Update() {
         if (ShouldGenerateSlice()) {
+            var randomZ = maxGeneratedDepth + UnityEngine.Random.Range(0f, sliceDepth);
             PopulateVolume(maxGeneratedDepth, maxGeneratedDepth + sliceDepth);
             DoDespawnPass();
+            AdvanceCanisterSpawner(randomZ);
         }
         ProcessSpawnQueue();
+    }
+
+    private void AdvanceCanisterSpawner(float z) {
+        slicesTilCanister--;
+        if (slicesTilCanister <= 0) {
+            slicesTilCanister = UnityEngine.Random.Range(minSlicesForCanister, maxSlicesForCanister+1);
+            SpawnCanister(z);
+        }
+    }
+
+    private void SpawnCanister(float atZ) {
+
+        var yOffset = UnityEngine.Random.Range(-1f, 1f) * canisterSpawnRadius;
+        var xOffset = UnityEngine.Random.Range(-1f, 1f) * canisterSpawnRadius;
+        var worldCoords = solipsist.transform.position + new Vector3(xOffset, yOffset, atZ);
+        
+        var canisterInstance = Instantiate(canisterPrefab);
+        canisterInstance.transform.position = worldCoords;
+        maintainedObjects.Add(canisterInstance);
     }
 
     private void DoDespawnPass() {
