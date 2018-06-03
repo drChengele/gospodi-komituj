@@ -9,7 +9,7 @@ public class EndTextManager : MonoBehaviour {
 
     public Text lost;
 
-    public bool gameWon = false;
+    public bool gameWon = GameManager.IsSuccessGameOver;
 
     private void Awake()
     {

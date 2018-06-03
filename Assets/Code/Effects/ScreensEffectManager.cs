@@ -29,11 +29,12 @@ public class ScreensEffectManager : MonoBehaviour {
 
     string Process(string radarString) {
         var txt = radarString;
-        txt = txt.Replace("[DIST]", "123");
-        txt = txt.Replace("[BOUNTY]", "4983242$$");
-        txt = txt.Replace("[WEAPONCHARGE]", "58.5%");
-        txt = txt.Replace("[SHIELDCHARGE]", "58.5%");
-        txt = txt.Replace("[ENGINECHARGE]", "58.5%");
+        var mm = FindObjectOfType<ShipMilageManager>();
+        txt = txt.Replace("[DIST]", mm.remaining.ToString());
+        txt = txt.Replace("[BOUNTY]", (mm.score * 13).ToString("$"));
+        txt = txt.Replace("[WEAPONCHARGE]", $"{(int)(100 * ObjectManager.Instance.ShipSystems.Weapon.CurrentEnergy)}%" );
+        txt = txt.Replace("[SHIELDCHARGE]", $"{(int)(100 * ObjectManager.Instance.ShipSystems.Shield.CurrentEnergy)}%");
+        txt = txt.Replace("[ENGINECHARGE]", $"{(int)(100 * ObjectManager.Instance.ShipSystems.Engine.CurrentEnergy)}%");
         txt = txt.Replace("[REACTORTEMP]", "1 500 000 K");
 
         return txt;

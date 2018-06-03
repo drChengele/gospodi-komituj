@@ -27,8 +27,11 @@ public class GameManager : MonoBehaviour {
             functionalPanels[UnityEngine.Random.Range(0, functionalPanels.Length)].ChangeDamageState(DamageState.Malfunction);
     }
 
-    private void GameOver(bool success) {
-        
+    static public bool IsSuccessGameOver { get; private set; }
+
+    public void GameOver(bool success) {
+        IsSuccessGameOver = success;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
     }
 
     internal void AsteroidWasHitByBullet(Bullet bullet, GameObject asteroid) {
