@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EngineeringCameraEffectsManager : MonoBehaviour {
 
@@ -11,7 +9,7 @@ public class EngineeringCameraEffectsManager : MonoBehaviour {
     IInertiaProvider InertiaSource => ObjectManager.Instance.InertiaSource;
 
     void Update() {
-        ApplyInertia(InertiaSource.CurrentAccelerationRelative);
+        ApplyInertia(InertiaSource.CurrentAccelerationRelativeZeroToOne);
     }
 
     Vector3 _vel;

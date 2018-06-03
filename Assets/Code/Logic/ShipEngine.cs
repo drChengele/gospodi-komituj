@@ -2,14 +2,16 @@
 using UnityEngine;
 
 public class ShipEngine : ShipSystem {
-    Vector2 currentSignal;
+    Vector2 thrustSignal;
+    float rollSignal;
 
     public IEngineEffector EngineEffector => ObjectManager.Instance.ShipController;
 
     internal override void UpdateFrameLogic() {
         base.UpdateFrameLogic();
         // just read the state of the thruster signal
-        currentSignal = ObjectManager.Instance.PilotController.thrusterSignal;
+        thrustSignal = ObjectManager.Instance.PilotController.thrusterSignal;
+        rollSignal = ObjectManager.Instance.PilotController.rollSignal;
     }
 
     internal override void UpdateFixedLogic() {
@@ -18,11 +20,14 @@ public class ShipEngine : ShipSystem {
     }
 
     void ApplySignalToThrusters() {
-        EngineEffector.ApplyThrust(currentSignal);
+        EngineEffector.ApplyThrust(thrustSignal);
+        EngineEffector.ApplyRoll(rollSignal);
     }
 }
 
 public interface IEngineEffector {
+    void ApplyRoll(float roll);
+
     /// <summary>Expects thrust vector NOT GREATER THAN ONE</summary>
     void ApplyThrust(Vector2 thrust);
 }

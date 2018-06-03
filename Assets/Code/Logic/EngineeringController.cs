@@ -10,7 +10,7 @@ using UnityEngine;
 public class EngineeringController : MonoBehaviour {
 
     [SerializeField] Transform junkLayerRoot; // this is where tools and debris float
-    [SerializeField] [Range(0f, 2f)] float retainShipInertia;
+    [SerializeField] [Range(0f, 20f)] float shipInertiaModifier;
     [SerializeField] LayerMask interactiveLayerMask;
     [SerializeField] float maxObjectDragExtentsHorizontal;
     [SerializeField] float maxObjectDragExtentsVertical;
@@ -31,7 +31,7 @@ public class EngineeringController : MonoBehaviour {
 
     private void ProcessJunkPhysics() {
         var allObjects = junkLayerRoot.GetComponentsInChildren<Grabbable>();
-        var acceleration = ObjectManager.Instance.InertiaSource.CurrentAccelerationRelative * -retainShipInertia;
+        var acceleration = ObjectManager.Instance.InertiaSource.CurrentAccelerationRelativeZeroToOne * -shipInertiaModifier;
         foreach (var grabbable in allObjects) grabbable.Rigidbody.AddForce(acceleration * grabbable.receivedInertia, ForceMode.Acceleration);
     }
     private void UpdatePositionOfGrabbed() {
