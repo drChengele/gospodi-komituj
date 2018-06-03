@@ -14,15 +14,6 @@ public class EngineeringController : MonoBehaviour {
     [SerializeField] LayerMask interactiveLayerMask;
     [SerializeField] float maxObjectDragExtentsHorizontal;
     [SerializeField] float maxObjectDragExtentsVertical;
-    //coriolis stuff, look away
-    [SerializeField] Transform vectorOneRef;
-    float distanceOne;
-    Vector2 vectorOne;
-    private void Awake()
-    {
-        vectorOne = new Vector2(vectorOneRef.localPosition.x, vectorOneRef.localPosition.y);
-        distanceOne = Vector2.Distance(vectorOne, Vector2.zero);
-    }
 
     private void Update() {
         if (Input.GetMouseButtonDown(0)) {
