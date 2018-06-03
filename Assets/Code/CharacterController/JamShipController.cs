@@ -74,4 +74,12 @@ public class JamShipController : MonoBehaviour, IEngineEffector, IInertiaProvide
     void FixVelocity() {
         currentVelocity.z = forwardSpeed;
     }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.tag == "Asteroid") {
+            ObjectManager.Instance.GameManager.ProcessAsteroidShipCollision(other.gameObject);
+        } else if (other.gameObject.tag == "Canister") {
+            ObjectManager.Instance.GameManager.ShipPickedUpCanister(other.gameObject.GetComponent<Canister>());
+        }
+    }
 }

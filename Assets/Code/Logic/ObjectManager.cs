@@ -9,6 +9,8 @@ public interface IObjectManager {
     JamShipController ShipController { get; }
     PilotController PilotController { get; }
     ShipSystems ShipSystems { get;  }
+    GameManager GameManager { get; }
+    CockpitEffectsManager CockpitEffects { get; }
 }
 
 
@@ -21,6 +23,8 @@ public class ObjectManager : MonoBehaviour, IObjectManager {
     [SerializeField] Camera worldCamera;
     [SerializeField] ShipSystems shipSystems;
     [SerializeField] ShipReactor shipReactor;
+    [SerializeField] GameManager gameManager;
+    [SerializeField] CockpitEffectsManager cockpitEffects;
 
     public IInertiaProvider InertiaSource => shipController;
     public JamShipController ShipController => shipController;
@@ -30,6 +34,8 @@ public class ObjectManager : MonoBehaviour, IObjectManager {
     public Camera WorldCamera => worldCamera;
     public ShipSystems ShipSystems => shipSystems;
     public ShipReactor ShipReactor => shipReactor;
+    public GameManager GameManager => gameManager;
+    public CockpitEffectsManager CockpitEffects => cockpitEffects;
 
     public static IObjectManager Instance { get; private set; }
 

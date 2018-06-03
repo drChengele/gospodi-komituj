@@ -19,8 +19,8 @@ public class ShipSystems : MonoBehaviour {
         foreach (var system in allSystems) system.Initialize(this);
         Engine = allSystems.OfType<ShipEngine>().First();
         Weapon = allSystems.OfType<LazzorBeam>().First();
-        Reactor = allSystems.OfType<ShipReactor>().First();
-        Shield = allSystems.OfType<Shield>().First();
+        Reactor = allSystems.OfType<ShipReactor>().FirstOrDefault();
+        Shield = allSystems.OfType<Shield>().FirstOrDefault();
     }
 
     private void FixedUpdate() {
