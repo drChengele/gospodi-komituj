@@ -15,6 +15,7 @@ public interface IObjectManager {
     EngineeringController EngineeringController { get; }
     LayerMask WorldLayerMask { get; }
     PrefabContainer Prefabs { get; }
+    CockpitController CockpitController { get; }
 }
 
 
@@ -33,6 +34,7 @@ public class ObjectManager : MonoBehaviour, IObjectManager {
     [SerializeField] EngineeringController engineeringController;
     [SerializeField] LayerMask worldLayerMask;
     [SerializeField] PrefabContainer prefabs;
+    [SerializeField] CockpitController cockpitController;
 
     public IInertiaProvider InertiaSource => shipController;
     public JamShipController ShipController => shipController;
@@ -48,6 +50,7 @@ public class ObjectManager : MonoBehaviour, IObjectManager {
     public EngineeringController EngineeringController => engineeringController;
     public LayerMask WorldLayerMask => worldLayerMask;
     public PrefabContainer Prefabs => prefabs;
+    public CockpitController CockpitController => cockpitController;
 
 
     public static IObjectManager Instance { get; private set; }

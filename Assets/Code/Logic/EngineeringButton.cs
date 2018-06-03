@@ -8,7 +8,24 @@ public class EngineeringButton : MonoBehaviour, IEngineerInteractible {
     [SerializeField] float rechargeEnergyRate;
     [SerializeField] float rechargeHeatRate;
 
+    float initialZ;
+    float targetZ;
+
+    void Awake() {
+        var rememberedZ = transform.localPosition.z;
+    }
+
+    void LateUpdate() {
+        var pos = transform.localPosition;
+        pos.z = targetZ;
+        transform.localPosition = pos;
+        targetZ = initialZ;
+        // update depressio:
+    }
+
+
     public void OnHoldContinued() {
+        targetZ = -0.0977f;
         switch (buttonFunction)
         {
 
