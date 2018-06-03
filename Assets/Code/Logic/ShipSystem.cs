@@ -13,7 +13,7 @@ public abstract class ShipSystem : MonoBehaviour {
     }
 
     public ShipSystems myShip { get; private set; }
-    public float CurrentEnergy { get; private set; }
+    public float CurrentEnergy { get; private set; } = 50;
 
     const float MinEnergy = 0f;
     const float MaxEnergy = 100f;
