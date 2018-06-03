@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 33979308097198548}
   - component: {fileID: 23414381503083274}
   - component: {fileID: 54657540679907468}
+  - component: {fileID: 114228330500993232}
   m_Layer: 15
   m_Name: Alat2
   m_TagString: Untagged
@@ -129,6 +130,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
+--- !u!114 &114228330500993232
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1782509074102056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7ff9d18486eeb54692a8920e72f81fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTool: 0
+  rotationTime: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  rayOrigin: {fileID: 0}
+  holdEuler: {x: 0, y: 0, z: 0}
 --- !u!136 &136588072541323216
 CapsuleCollider:
   m_ObjectHideFlags: 1

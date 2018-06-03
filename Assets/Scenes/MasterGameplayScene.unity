@@ -413,7 +413,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6ebc68a74936a43488e1d68d0485d97d, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 6ebc68a74936a43488e1d68d0485d97d, type: 3}
       propertyPath: m_Materials.Array.data[0]
