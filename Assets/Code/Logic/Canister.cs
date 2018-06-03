@@ -5,10 +5,7 @@ public class Canister : MonoBehaviour {
     public WireType wireType;
 
     private void Awake() {
-        var diceRoll = UnityEngine.Random.Range(1, 4);
-        if (diceRoll == 1) wireType = WireType.Green;
-        if (diceRoll == 2) wireType = WireType.Orange;
-        if (diceRoll == 3) wireType = WireType.Purple;
+        wireType = Utility.GetRandomWire();
         UpdateMaterialColor();
     }
 
@@ -24,5 +21,17 @@ public class Canister : MonoBehaviour {
             case WireType.Green: return new Color(0.4f, 1f, 0.34f);
         }
         return Color.black;
+    }
+
+    
+}
+
+static public partial class Utility {
+    static public WireType GetRandomWire() {
+        var diceRoll = UnityEngine.Random.Range(1, 4);
+        if (diceRoll == 1) return WireType.Green;
+        if (diceRoll == 2) return WireType.Orange;
+        if (diceRoll == 3) return WireType.Purple;
+        return WireType.Purple;
     }
 }

@@ -2743,6 +2743,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   rayOrigin: {fileID: 0}
+  holdEuler: {x: 0, y: 0, z: 0}
 --- !u!114 &114331844428950704
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2775,6 +2776,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   rayOrigin: {fileID: 0}
+  holdEuler: {x: 0, y: 0, z: 0}
 --- !u!114 &114433037786572416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2928,6 +2930,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1048576
   rayOrigin: {fileID: 4020736933826784}
+  holdEuler: {x: 90, y: 0, z: 0}
 --- !u!114 &114877377478412428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2974,6 +2977,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   rayOrigin: {fileID: 0}
+  holdEuler: {x: 0, y: 0, z: 0}
 --- !u!114 &114930252260702212
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3006,6 +3010,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   rayOrigin: {fileID: 0}
+  holdEuler: {x: 0, y: 0, z: 0}
 --- !u!114 &114958963323394774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3023,6 +3028,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   rayOrigin: {fileID: 0}
+  holdEuler: {x: 0, y: 0, z: 0}
 --- !u!136 &136005549578359186
 CapsuleCollider:
   m_ObjectHideFlags: 1

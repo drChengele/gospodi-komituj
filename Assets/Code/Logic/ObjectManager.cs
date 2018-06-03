@@ -40,6 +40,7 @@ public class ObjectManager : MonoBehaviour, IObjectManager {
     public CockpitEffectsManager CockpitEffects => cockpitEffects;
     public WireSpawner WireSpawner => wireSpawner;
 
+
     public static IObjectManager Instance { get; private set; }
 
     void Awake() {

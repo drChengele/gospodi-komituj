@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public interface IEngineerInteractible {
     void OnHoldStarted();
@@ -15,7 +16,8 @@ public class Grabbable : MonoBehaviour, IEngineerInteractible {
     float elapsedTime = 0f;
     bool toolAligned = false;
     [SerializeField] LayerMask layerMask;
-    [SerializeField] Transform rayOrigin;
+    [SerializeField] public Transform rayOrigin;
+    [SerializeField] Vector3 holdEuler;
 
 
     public Rigidbody Rigidbody => GetComponent<Rigidbody>();
@@ -32,28 +34,33 @@ public class Grabbable : MonoBehaviour, IEngineerInteractible {
                 timeFraction = 1f;
                 toolAligned = true;
             }
-            Rigidbody.MoveRotation(Quaternion.Slerp(Rigidbody.transform.rotation, Quaternion.Euler(90f, 0f, 0f), timeFraction));
+            Rigidbody.MoveRotation(Quaternion.Slerp(Rigidbody.transform.rotation, Quaternion.Euler(holdEuler), timeFraction));
             if (toolAligned)
             {
-                RaycastHit hit;
-                //Debug.DrawLine(rayOrigin.position, rayOrigin.up * 10f,Color.red,2f);
-                if (Physics.Raycast(rayOrigin.position, rayOrigin.up * 10f, out hit, layerMask))
-                {
-                    var panel = hit.collider.gameObject.GetComponent<IEngineerInteractible>() ?? hit.rigidbody?.gameObject.GetComponent<IEngineerInteractible>();
-                    if (panel != null)
-                    {
-                        panelToCharge = panel as PanelSystem;
-                        panelToCharge?.ActivateCharging();
-                    }
-                }
+                var panelToCharge = GetPanelUnderneath();
+                panelToCharge?.ActivateCharging();
                 panelToCharge = null;
             }
         }
     }
 
+    public PanelSystem GetPanelUnderneath() {
+        RaycastHit hit;
+        if (Physics.Raycast(rayOrigin.position, rayOrigin.up * 10f, out hit, layerMask)) {
+            var panel = hit.collider.gameObject.GetComponent<PanelSystem>() ?? hit.rigidbody?.gameObject.GetComponent<PanelSystem>();
+            return panel;
+        }
+        return null;
+        
+    }
+
     public void OnHoldReleased() {
         Rigidbody.isKinematic = false;
-        if (isTool) ResetToolData();
+        if (isTool) {
+            ResetToolData();
+            var wire = GetComponent<WireBehaviour>();
+            wire?.ProcessReleased();
+        }
     }
 
     public void OnHoldStarted() {
@@ -61,7 +68,7 @@ public class Grabbable : MonoBehaviour, IEngineerInteractible {
     }
 
     private void Awake() {
-        receivedInertia = Random.Range(0.8f, 1.2f);
+        receivedInertia = UnityEngine.Random.Range(0.8f, 1.2f);
     }
 
     private void ResetToolData()

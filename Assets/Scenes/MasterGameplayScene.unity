@@ -953,6 +953,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114861566666575602, guid: 816f07dbb8ca4784c842ac74c840da1b,
+        type: 2}
+      propertyPath: holdEuler.x
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 816f07dbb8ca4784c842ac74c840da1b, type: 2}
   m_IsPrefabParent: 0
