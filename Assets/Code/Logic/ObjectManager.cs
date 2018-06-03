@@ -12,6 +12,9 @@ public interface IObjectManager {
     GameManager GameManager { get; }
     CockpitEffectsManager CockpitEffects { get; }
     WireSpawner WireSpawner { get; }
+    EngineeringController EngineeringController { get; }
+    LayerMask WorldLayerMask { get; }
+    PrefabContainer Prefabs { get; }
 }
 
 
@@ -27,6 +30,9 @@ public class ObjectManager : MonoBehaviour, IObjectManager {
     [SerializeField] GameManager gameManager;
     [SerializeField] CockpitEffectsManager cockpitEffects;
     [SerializeField] WireSpawner wireSpawner;
+    [SerializeField] EngineeringController engineeringController;
+    [SerializeField] LayerMask worldLayerMask;
+    [SerializeField] PrefabContainer prefabs;
 
     public IInertiaProvider InertiaSource => shipController;
     public JamShipController ShipController => shipController;
@@ -39,6 +45,9 @@ public class ObjectManager : MonoBehaviour, IObjectManager {
     public GameManager GameManager => gameManager;
     public CockpitEffectsManager CockpitEffects => cockpitEffects;
     public WireSpawner WireSpawner => wireSpawner;
+    public EngineeringController EngineeringController => engineeringController;
+    public LayerMask WorldLayerMask => worldLayerMask;
+    public PrefabContainer Prefabs => prefabs;
 
 
     public static IObjectManager Instance { get; private set; }

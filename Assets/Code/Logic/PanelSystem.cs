@@ -66,6 +66,7 @@ public class PanelSystem : ShipSystem , IEngineerInteractible {
 
     private void Update()
     {
+
         switch (currentDamageState)
         {
             case DamageState.Operational:
@@ -131,11 +132,11 @@ public class PanelSystem : ShipSystem , IEngineerInteractible {
     }
 
     private void CloseGate() {
-        // todo : animation
+        GetComponent<Animator>().SetBool("Open", false);
     }
 
     private void OpenGate() {
-        // todo : animation
+        GetComponent<Animator>().SetBool("Open", true);
     }
 
     private bool IsFullyRepaired() {
@@ -163,12 +164,15 @@ public class PanelSystem : ShipSystem , IEngineerInteractible {
 
     void RegenerateSingleWireVisuals(WireSlot wireSlot) {
         DeleteWireVisuals(wireSlot.index);
+
         if (currentDamageState == DamageState.Operational) {
             SpawnObjectInWireSlot(wireSlot, ObjectManager.Instance.WireSpawner.wirePrefabInSituFull);
         }
+
         if (currentDamageState == DamageState.Destroyed) {
             SpawnObjectInWireSlot(wireSlot, ObjectManager.Instance.WireSpawner.wirePrefabInSituDestroyed);
         }
+
         if (currentDamageState == DamageState.Malfunction) {
             SpawnObjectInWireSlot(wireSlot, ObjectManager.Instance.WireSpawner.wirePrefabInSituMalfunction);
         }
@@ -176,9 +180,11 @@ public class PanelSystem : ShipSystem , IEngineerInteractible {
 
     private void SpawnObjectInWireSlot(WireSlot wireSlot, GameObject wirePrefab) {
         var wireGO = Instantiate(wirePrefab) as GameObject;
+        wireGO.transform.parent = wireRoots[wireSlot.index];
+        wireGO.transform.localPosition = Vector3.zero;
+        wireGO.transform.localRotation = Quaternion.identity;
+        wireGO.GetComponent<WireColorizer>().SetWireColor(wireSlot.wire);
     }
-
-
 
     private void DeleteWireVisuals(int index) {
         var z = wireRoots[index];

@@ -8,6 +8,7 @@ public class WireSpawner : MonoBehaviour {
     [SerializeField] Transform wireParent;
     [SerializeField] GameObject wire;
     [SerializeField] Transform spawnOrigin;
+    [SerializeField] Animator klapna;
 
     [SerializeField] public GameObject wirePrefabInSituFull;
     [SerializeField] public GameObject wirePrefabInSituMalfunction;
@@ -16,6 +17,7 @@ public class WireSpawner : MonoBehaviour {
 
     public void SpawnWire(WireType wType)
     {
+        klapna.SetTrigger("Open");
         var go = (GameObject)Instantiate(wire, spawnOrigin.position, Quaternion.identity, wireParent);
         go.GetComponent<WireBehaviour>().wType = wType;
         go.GetComponent<MeshRenderer>().material = materials[(int)wType];

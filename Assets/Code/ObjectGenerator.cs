@@ -43,7 +43,6 @@ public class ObjectGenerator : MonoBehaviour {
         PopulateVolume(ShipProgress, ShipProgress + generateAhead);
     }
 
-
     private void Update() {
         if (ShouldGenerateSlice()) {
             var randomZ = maxGeneratedDepth + UnityEngine.Random.Range(0f, sliceDepth);
@@ -58,19 +57,24 @@ public class ObjectGenerator : MonoBehaviour {
         slicesTilCanister--;
         if (slicesTilCanister <= 0) {
             slicesTilCanister = UnityEngine.Random.Range(minSlicesForCanister, maxSlicesForCanister+1);
-            SpawnCanister(z);
+            SpawnCanisters(z);
         }
     }
 
-    private void SpawnCanister(float atZ) {
+    private void SpawnCanisters(float atZ) {
 
         var yOffset = UnityEngine.Random.Range(-1f, 1f) * canisterSpawnRadius;
         var xOffset = UnityEngine.Random.Range(-1f, 1f) * canisterSpawnRadius;
         var worldCoords = solipsist.transform.position + new Vector3(xOffset, yOffset, atZ);
-        
-        var canisterInstance = Instantiate(canisterPrefab);
-        canisterInstance.transform.position = worldCoords;
-        maintainedObjects.Add(canisterInstance);
+
+        var offset = solipsist.transform.localRotation * Vector3.right * canisterSpawnRadius;
+
+        for (var i = 0; i < 2; i++) { 
+            var firstCanisterInstance = Instantiate(canisterPrefab);
+            firstCanisterInstance.transform.position = worldCoords + offset * i;
+            maintainedObjects.Add(firstCanisterInstance);
+        }
+     
     }
 
     private void DoDespawnPass() {

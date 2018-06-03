@@ -4,6 +4,8 @@ using UnityEngine;
 public class CameraShaker : MonoBehaviour {
     [SerializeField] float ferocityRetain;
     [SerializeField] float exaggeration;
+    [SerializeField] float radial;
+
     float ferocity;
 
     public void AddFerocity(float howMuch) {
@@ -20,7 +22,9 @@ public class CameraShaker : MonoBehaviour {
             Random.Range(-1f, 1f),
             Random.Range(-1f, 1f)
         );
-        v *= ferocity * exaggeration;
-        transform.localPosition = v;
+        v *= ferocity; ;
+        transform.localPosition = v * exaggeration;
+
+        transform.localRotation = Quaternion.Euler(v * radial);
     }
 }

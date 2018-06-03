@@ -32,13 +32,15 @@ public class GameManager : MonoBehaviour {
     }
 
     internal void AsteroidWasHitByBullet(Bullet bullet, GameObject asteroid) {
-        // destroy asteroid
-        // instantiate explosion
-        // instantiate chunks
+        Debug.Log("ASTEROID HIT BY BULLIT");
+        asteroid.SetActive(false);
+        bullet.DieSoon();
+        //Instantiate(ObjectManager.Instance.Prefabs.asteroidExplosion, bullet.transform.position, Quaternion.identity);
     }
 
     internal void CanisterWasHitByBullet(Bullet bullet, GameObject canister) {
-        // instantiate explosion
+        canister.SetActive(false);
+        bullet.DieSoon();
     }
 
     internal void ShipPickedUpCanister(Canister canister) {
@@ -54,8 +56,9 @@ public class GameManager : MonoBehaviour {
         } 
     }
 
+    // called by panel
     internal void PanelBroken(PanelSystem panelSystem) {
-        throw new NotImplementedException();
+        
     }
 
     internal void PanelDestroyed(PanelSystem panelSystem) {
@@ -65,5 +68,11 @@ public class GameManager : MonoBehaviour {
     internal void PanelMadeOperational(PanelSystem panelSystem) {
         throw new NotImplementedException();
     }
+
+    // make something go wrong
+    public void JustFuckMyDayUpFam() {
+
+    }
+
 }
 

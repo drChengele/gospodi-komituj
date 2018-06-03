@@ -6,7 +6,9 @@ public class TextListScreenController : MonoBehaviour {
 
     [SerializeField] int maxLines;
     [SerializeField] Text targetTextObj;
-    public List<string> texts = new List<string>();
+    [SerializeField] string[] sourceTexts;
+    
+    List<string> texts = new List<string>();
 
     public void AddText(string text) {
         texts.Add(text);
@@ -18,16 +20,8 @@ public class TextListScreenController : MonoBehaviour {
         InvokeRepeating("AddRandomText", 1f, 0.5f);
     }
 
-    void AddRandomText() {
-        var strs = new[] {
-          "Hello world",
-          "Bounty inreased",
-          "ULTRAAAA",
-          "Enemy Destroyed"
-        };
-
-        var str = strs[UnityEngine.Random.Range(0, strs.Length)];
-
+    void AddRandomText() {        
+        var str = sourceTexts[UnityEngine.Random.Range(0, sourceTexts.Length)];
         AddText(str);
     }
 

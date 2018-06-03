@@ -746,6 +746,7 @@ GameObject:
   - component: {fileID: 4401708246398302}
   - component: {fileID: 20111808150799184}
   - component: {fileID: 114543599001174812}
+  - component: {fileID: 114445618152923880}
   m_Layer: 0
   m_Name: Engineer Camera
   m_TagString: MainCamera
@@ -2759,6 +2760,7 @@ MonoBehaviour:
   rechargeRate: 30
   isPanel: 1
   currentDamageState: 0
+  wireRoots: []
 --- !u!114 &114367225533173262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2792,6 +2794,21 @@ MonoBehaviour:
   rechargeRate: 30
   isPanel: 1
   currentDamageState: 0
+  wireRoots: []
+--- !u!114 &114445618152923880
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1999447112446804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 650a1c4586067f24890d8276577aea73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ferocityRetain: 0.91
+  exaggeration: 0.03
+  radial: 0.04
 --- !u!114 &114511538257131094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2895,6 +2912,7 @@ MonoBehaviour:
   rechargeRate: 30
   isPanel: 1
   currentDamageState: 0
+  wireRoots: []
 --- !u!114 &114781418087120598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2913,6 +2931,12 @@ MonoBehaviour:
   wireParent: {fileID: 4323248438681632}
   wire: {fileID: 1763185279595066, guid: 1ba7d9d2bfe4bc146927f686abc454e9, type: 2}
   spawnOrigin: {fileID: 4095066853953304}
+  wirePrefabInSituFull: {fileID: 1648586163684268, guid: 64170039684b2c041a9c07ac0d511340,
+    type: 2}
+  wirePrefabInSituMalfunction: {fileID: 1915212275756546, guid: 0a8b9310ff2b2f34f98e5d74fcb4fc82,
+    type: 2}
+  wirePrefabInSituDestroyed: {fileID: 1801664035666744, guid: da2f85143d71f0d46a9159fad143301b,
+    type: 2}
 --- !u!114 &114861566666575602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2946,6 +2970,7 @@ MonoBehaviour:
   rechargeRate: 30
   isPanel: 1
   currentDamageState: 0
+  wireRoots: []
 --- !u!114 &114915809125959574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2993,6 +3018,7 @@ MonoBehaviour:
   rechargeRate: 30
   isPanel: 1
   currentDamageState: 0
+  wireRoots: []
 --- !u!114 &114950104412790948
 MonoBehaviour:
   m_ObjectHideFlags: 1
