@@ -14,6 +14,7 @@ public class EngineeringController : MonoBehaviour {
     [SerializeField] LayerMask interactiveLayerMask;
     [SerializeField] float maxObjectDragExtentsHorizontal;
     [SerializeField] float maxObjectDragExtentsVertical;
+    [SerializeField] [Range(0f,2f)] float coriolisFudgeFactor = 0.7f;
 
     private void Update() {
         if (Input.GetMouseButtonDown(0)) {
@@ -32,14 +33,23 @@ public class EngineeringController : MonoBehaviour {
     private void ProcessJunkPhysics() {
         var allObjects = junkLayerRoot.GetComponentsInChildren<Grabbable>();
         var acceleration = ObjectManager.Instance.InertiaSource.CurrentAccelerationRelativeZeroToOne * -shipInertiaModifier;
-        foreach (var grabbable in allObjects) grabbable.Rigidbody.AddForce(acceleration * grabbable.receivedInertia, ForceMode.Acceleration);
         foreach (var grabbable in allObjects) ApplyCoriolis(grabbable.Rigidbody, ObjectManager.Instance.InertiaSource.CurrentRollSpeed);
+        foreach (var grabbable in allObjects) grabbable.Rigidbody.AddForce(acceleration * grabbable.receivedInertia, ForceMode.Acceleration);
     }
     
     private void ApplyCoriolis(Rigidbody rigidbody, float currentRollSpeed) {
         // todo: 
         // find appropriate tangent speed based on location in engineering compartment 
-        // apply this to rigidbody using AddForce(..., ForceMode.Acceleration);
+        // apply this to rigidbody using AddForce(..., ForceMode.Acceleration)
+
+        if (Mathf.Abs(currentRollSpeed) > float.Epsilon) {
+            var angle = 90f * Mathf.Sign(currentRollSpeed);
+            var tangent = Utility.RotateVector(new Vector2(rigidbody.transform.localPosition.x, rigidbody.transform.localPosition.y), angle).normalized;
+            var forceRatio = rigidbody.transform.localPosition.magnitude / coriolisFudgeFactor;
+            var coriolisForce = new Vector3(tangent.x, tangent.y, 0f) * Mathf.Abs(currentRollSpeed) * forceRatio * Time.fixedDeltaTime;
+            rigidbody.AddForce(coriolisForce, ForceMode.Acceleration);
+            
+        }
     }
 
     private void UpdatePositionOfGrabbed() {

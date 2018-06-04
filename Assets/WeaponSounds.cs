@@ -13,8 +13,11 @@ public class WeaponSounds : MonoBehaviour {
 	
 	public void PlayPewPew()
     {
-        myAudioSource.Stop();
-        myAudioSource.clip = pewPews[Random.Range(0, pewPews.Length)];
-        myAudioSource.Play();
+        if (pewPews.Length > 0)
+        {
+            myAudioSource.Stop();
+            myAudioSource.clip = pewPews[Random.Range(0, pewPews.Length)];
+            myAudioSource.Play();
+        }
     }
 }

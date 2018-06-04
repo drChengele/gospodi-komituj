@@ -1443,6 +1443,7 @@ MonoBehaviour:
     m_Bits: 32768
   maxObjectDragExtentsHorizontal: 0.4
   maxObjectDragExtentsVertical: 0.4
+  coriolisFudgeFactor: 0.7
 --- !u!1 &175547843
 GameObject:
   m_ObjectHideFlags: 0
@@ -6003,6 +6004,7 @@ MonoBehaviour:
   systems: {fileID: 906935813}
   thrustPower: 45
   rollPower: 270
+  maxRollSpeed: 120
   forwardSpeed: 60
   inertiaRetain: 0.96
 --- !u!54 &823081976

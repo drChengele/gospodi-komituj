@@ -17,6 +17,9 @@ public class JamShipController : MonoBehaviour, IEngineEffector, IInertiaProvide
     [Range(20f, 600f)]
     public float rollPower;
 
+    [Range(20f, 720f)]
+    public float maxRollSpeed;
+
     public float forwardSpeed;
 
     [Range(0.92f, 0.999f)]
@@ -71,7 +74,7 @@ public class JamShipController : MonoBehaviour, IEngineEffector, IInertiaProvide
     float targetRoll;
 
     public void ApplyRoll(float roll) {
-        targetRoll = roll * 120f;
+        targetRoll = roll * maxRollSpeed;
     }
 
     void FixVelocity() {

@@ -168,4 +168,15 @@ static public partial class Utility {
         z *= 360f;
         return Quaternion.Euler(z);
     }
+
+    public static Vector2 RotateVector(Vector2 vec, float angle) 
+    {
+        //e necu da racunam sin i cos dva puta... ima dustedim nekoliko ciklusa pa taman crko
+        var sin = Mathf.Sin(Mathf.Deg2Rad * angle);
+        var cos = Mathf.Cos(Mathf.Deg2Rad * angle);
+        var x = vec.x * cos - vec.y * sin;
+        var y = vec.x * sin + vec.y * cos;
+
+        return new Vector2(x,y);
+    }
 }
