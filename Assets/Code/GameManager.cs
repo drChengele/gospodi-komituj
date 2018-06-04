@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
             functionalPanels[UnityEngine.Random.Range(0, functionalPanels.Length)].ChangeDamageState(DamageState.Malfunction);
     }
 
-    static public bool IsSuccessGameOver { get; private set; }
+    static public bool IsSuccessGameOver { get; set; }
 
     public void GameOver(bool success) {
         IsSuccessGameOver = success;

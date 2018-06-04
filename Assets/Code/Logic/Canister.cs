@@ -23,7 +23,6 @@ public class Canister : MonoBehaviour {
         return Color.black;
     }
 
-    
 }
 
 static public partial class Utility {

@@ -36,6 +36,7 @@ public class ShipMilageManager : MonoBehaviour {
 
     void ResolveGoalReached()
     {
+        GameManager.IsSuccessGameOver = true;
         UnityEngine.SceneManagement.SceneManager.LoadScene(2);
     }
 }
