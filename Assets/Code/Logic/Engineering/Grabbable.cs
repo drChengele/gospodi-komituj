@@ -15,7 +15,7 @@ public abstract class EngineeringFloatingItem : MonoBehaviour {
     protected virtual void Awake() {
         receivedInertia = UnityEngine.Random.Range(0.8f, 1.2f);
     }
-}
+}                                   
 
 // a grabbable component object
 public class Grabbable : EngineeringFloatingItem, IEngineerInteractible {
