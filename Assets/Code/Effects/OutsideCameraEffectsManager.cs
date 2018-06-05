@@ -7,7 +7,7 @@ public class OutsideCameraEffectsManager : MonoBehaviour {
     [SerializeField] [Range(-10f, 10f)] float pitchFactor;
     [SerializeField] [Range(-10f, 10f)] float yawFactor;
     [SerializeField] [Range(-20f, 20f)] float rollFactor;
-    [SerializeField] [Range(0f, 1f)] float cameraResponsiveness;
+    [SerializeField] [Range(0f, 50f)] float cameraResponsiveness;
 
     public IInertiaProvider InertiaSource => ObjectManager.Instance.InertiaSource;
 
@@ -23,6 +23,6 @@ public class OutsideCameraEffectsManager : MonoBehaviour {
         var roll  = vel.x * rollFactor;
 
         var targetRotation = Quaternion.Euler(pitch, yaw, roll);
-        outsideCameraPivot.transform.localRotation = Quaternion.Slerp(outsideCameraPivot.transform.localRotation, targetRotation, cameraResponsiveness);
+        outsideCameraPivot.transform.localRotation = Quaternion.Slerp(outsideCameraPivot.transform.localRotation, targetRotation, cameraResponsiveness * Time.deltaTime);
     }
 }

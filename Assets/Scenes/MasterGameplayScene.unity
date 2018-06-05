@@ -3843,9 +3843,9 @@ MonoBehaviour:
   - Life support failing
   - '[TRACKED] objects tracked'
   cleanupFrequency: 1
-  radarUpdateStep: 4
-  visibilitySpanHorizontal: 20
-  visibilityDistanceAhead: 180
+  radarUpdateStep: 6
+  visibilitySpanHorizontal: 22
+  visibilityDistanceAhead: 175
   generator: {fileID: 1858313833}
 --- !u!1001 &498551486
 Prefab:
@@ -9062,7 +9062,7 @@ MonoBehaviour:
   pitchFactor: -0.2
   yawFactor: 0.2
   rollFactor: 0.3
-  cameraResponsiveness: 0.05
+  cameraResponsiveness: 12
 --- !u!4 &1473028055
 Transform:
   m_ObjectHideFlags: 0
@@ -11699,7 +11699,7 @@ MonoBehaviour:
   - {fileID: 1198102269932084, guid: ebf4f69976e4a9341a7c14bb1959577e, type: 2}
   scaleVariance: 0.5
   density: 400
-  maxSpawnsPerFrame: 11
+  maxSpawnsPerFrame: 30
   minSlicesForCanister: 3
   maxSlicesForCanister: 7
   canisterPrefab: {fileID: 1916489915785880, guid: 3fcb981aa09dcbc42a409b39c643834c,

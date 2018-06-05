@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour {
         var functionalPanels = allPanels.Where(panel => panel.CurrentDamageState == DamageState.Operational).ToArray();
 
         if (functionalPanels.Length == 0) {
-            //GameOver(false);
+            
         } else
             functionalPanels[UnityEngine.Random.Range(0, functionalPanels.Length)].ChangeDamageState(DamageState.Malfunction);
     }
@@ -70,6 +70,10 @@ public class GameManager : MonoBehaviour {
 
     internal void PanelDestroyed(PanelSystem panelSystem) {
         Instantiate(ObjectManager.Instance.Prefabs.particles_smoke, panelSystem.transform.position, Quaternion.identity);
+        var allPanels = FindObjectsOfType<PanelSystem>();
+        var nonDestroyedPanels = allPanels.Count(panel => panel.CurrentDamageState != DamageState.Destroyed);
+        if (nonDestroyedPanels == 0)
+            GameOver(false);
     }
 
     internal void PanelMadeOperational(PanelSystem panelSystem) {
