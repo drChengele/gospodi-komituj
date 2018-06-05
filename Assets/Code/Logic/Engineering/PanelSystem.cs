@@ -10,7 +10,11 @@ public enum DamageState {
     Destroyed,
 }
 
-public class PanelSystem : ShipSystem , IEngineerInteractible {
+public abstract class InteractorTarget : ShipSystem {
+
+}
+
+public class PanelSystem : InteractorTarget {
 
     bool isCharging = false;
     public bool isPanel = true;
@@ -92,21 +96,6 @@ public class PanelSystem : ShipSystem , IEngineerInteractible {
     private void ShortCircuit() {
         //ObjectManager.Instance.GameManager
         ChangeDamageState(DamageState.Destroyed);
-    }
-
-    public void OnHoldStarted()
-    {
-        //throw new System.NotImplementedException();
-    }
-
-    public void OnHoldContinued()
-    {
-        //throw new System.NotImplementedException();
-    }
-
-    public void OnHoldReleased()
-    {
-       // throw new System.NotImplementedException();
     }
 
     public void SlotWire(WireBehaviour wire) {

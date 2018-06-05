@@ -201,7 +201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 11105893}
   - component: {fileID: 11105894}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Interactive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -368,7 +368,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -479,14 +479,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ff9d18486eeb54692a8920e72f81fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTool: 1
-  rotationTime: 1
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 32768
-  rayOrigin: {fileID: 2120158965}
   holdEuler: {x: 0, y: 90, z: 0}
-  isCharger: 1
+  interactionTargetLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  rayOrigin: {fileID: 2120158965}
 --- !u!54 &25566470
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -693,7 +690,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -842,7 +839,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -1444,6 +1441,9 @@ MonoBehaviour:
   maxObjectDragExtentsHorizontal: 0.4
   maxObjectDragExtentsVertical: 0.4
   coriolisFudgeFactor: 0.7
+  panelInteractionLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &175547843
 GameObject:
   m_ObjectHideFlags: 0
@@ -1454,7 +1454,7 @@ GameObject:
   - component: {fileID: 175547844}
   - component: {fileID: 175547846}
   - component: {fileID: 175547845}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: lower_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1579,7 +1579,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -1653,7 +1653,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -1834,7 +1834,7 @@ GameObject:
   m_Component:
   - component: {fileID: 249466422}
   - component: {fileID: 249466423}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: LampGroup:Panel (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2377,7 +2377,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1048576
+    m_Bits: 1146880
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -2441,7 +2441,7 @@ GameObject:
   - component: {fileID: 307006566}
   - component: {fileID: 307006568}
   - component: {fileID: 307006567}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: lower_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2591,7 +2591,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 318419387}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Wire Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2672,7 +2672,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -2962,7 +2962,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -2984,7 +2984,7 @@ GameObject:
   m_Component:
   - component: {fileID: 328462071}
   - component: {fileID: 328462072}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Interactive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3077,7 +3077,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -3151,7 +3151,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -3274,7 +3274,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -3362,7 +3362,7 @@ GameObject:
   - component: {fileID: 432112187}
   - component: {fileID: 432112189}
   - component: {fileID: 432112188}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: upper_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3434,7 +3434,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 432992055}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Wire Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3614,7 +3614,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -3912,7 +3912,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 514442519}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Wire Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3942,7 +3942,7 @@ GameObject:
   - component: {fileID: 516096419}
   - component: {fileID: 516096421}
   - component: {fileID: 516096420}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: upper_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4014,7 +4014,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 520620623}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Wire Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4190,7 +4190,7 @@ GameObject:
   - component: {fileID: 529985188}
   - component: {fileID: 529985189}
   - component: {fileID: 529985190}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: PANEL A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4388,7 +4388,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -4642,7 +4642,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 670091451}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Wire Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4950,7 +4950,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -5068,7 +5068,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 0, b: 0.037613392, a: 0}
+  m_BackGroundColor: {r: 0.9716981, g: 0, b: 0.03810569, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0.5
@@ -5083,13 +5083,13 @@ Camera:
   m_Depth: 3
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1081344
+    m_Bits: 1146880
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 0
+  m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 1
   m_OcclusionCulling: 1
@@ -5171,7 +5171,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -5305,7 +5305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 739174307}
   - component: {fileID: 739174308}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: LampGroup:Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5491,7 +5491,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -5989,7 +5989,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 846415506}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: DoorPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6024,7 +6024,7 @@ GameObject:
   - component: {fileID: 876388050}
   - component: {fileID: 876388052}
   - component: {fileID: 876388051}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: lower_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6711,7 +6711,7 @@ GameObject:
   m_Component:
   - component: {fileID: 983939700}
   - component: {fileID: 983939701}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: LampGroup:Panel (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7084,7 +7084,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1071655954}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: DoorPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7218,7 +7218,7 @@ GameObject:
   - component: {fileID: 1101926727}
   - component: {fileID: 1101926729}
   - component: {fileID: 1101926728}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: PANEL B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7528,7 +7528,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -7602,7 +7602,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -7624,7 +7624,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1187293911}
   - component: {fileID: 1187293912}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Interactive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7664,7 +7664,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1231029180}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Wire Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7692,7 +7692,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1238641356}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Wire Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7841,7 +7841,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -7936,7 +7936,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1304867415}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: DoorPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8022,7 +8022,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -8096,7 +8096,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -8366,7 +8366,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1368279475}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: DoorPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8544,7 +8544,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -8889,7 +8889,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -9235,7 +9235,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -9258,7 +9258,7 @@ GameObject:
   - component: {fileID: 1512524517}
   - component: {fileID: 1512524519}
   - component: {fileID: 1512524518}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: upper_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9515,7 +9515,7 @@ GameObject:
   - component: {fileID: 1544663842}
   - component: {fileID: 1544663844}
   - component: {fileID: 1544663843}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: PANEL C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9639,7 +9639,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1565180837}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Wire Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9843,7 +9843,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -9917,7 +9917,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -9991,7 +9991,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -10271,7 +10271,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -10419,7 +10419,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -10493,7 +10493,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -10779,7 +10779,7 @@ GameObject:
   - component: {fileID: 1751128899}
   - component: {fileID: 1751128901}
   - component: {fileID: 1751128900}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: PANEL D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10978,7 +10978,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -11268,7 +11268,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1822961437}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Wire Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11424,7 +11424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1855528495}
   - component: {fileID: 1855528496}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: LampGroup:Panel (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11695,7 +11695,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1081344
+    m_Bits: 1146880
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -11713,7 +11713,7 @@ GameObject:
   - component: {fileID: 1880816148}
   - component: {fileID: 1880816150}
   - component: {fileID: 1880816149}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: lower_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11859,7 +11859,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1908617752}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Wire Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11940,7 +11940,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -12014,7 +12014,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -12122,7 +12122,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -12196,7 +12196,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -12270,7 +12270,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -12344,7 +12344,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -12406,7 +12406,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1982459871}
   - component: {fileID: 1982459872}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Interactive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12446,7 +12446,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1991444342}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Wire Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12685,7 +12685,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -12833,7 +12833,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -13099,7 +13099,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2058068433}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Wire Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13230,7 +13230,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
@@ -13327,7 +13327,7 @@ GameObject:
   - component: {fileID: 2101918310}
   - component: {fileID: 2101918312}
   - component: {fileID: 2101918311}
-  m_Layer: 20
+  m_Layer: 16
   m_Name: upper_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}

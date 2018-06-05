@@ -10,6 +10,7 @@ public enum WireType
     Green,
 }
 
+[RequireComponent(typeof(Grabbable))]
 public class WireBehaviour : MonoBehaviour {
 
     Vector3 vel;
@@ -21,16 +22,19 @@ public class WireBehaviour : MonoBehaviour {
     // Use this for initialization
     void Awake () {
         targetPos = new Vector3(transform.localPosition.x, transform.localPosition.y, 0f);
+        GetComponent<Grabbable>().HoldReleased += OnThisWasReleased;
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void OnThisWasReleased(Grabbable grabbable) {
+        var panel = grabbable.GetComponent<Interactor>()?.GetInteractorTargetUnderneathMe() as PanelSystem;
+        if (panel != null) ObjectManager.Instance.GameManager.AttemptedWireSlotting(this, panel);
+    }
+
+    // Update is called once per frame
+    void Update () {
         if (transform.localPosition.z > 0.001f)
-        {
             MoveToZeroPlane();
-        }
-        else if (!inPlane)
-        {
+        else if (!inPlane) {
             inPlane = true;
             transform.localPosition = targetPos;
             GetComponent<Rigidbody>().isKinematic = false;
@@ -39,13 +43,5 @@ public class WireBehaviour : MonoBehaviour {
 
     void MoveToZeroPlane() {
         transform.localPosition = Vector3.SmoothDamp(transform.localPosition, targetPos, ref vel, dampFactor);
-    }
-
-    internal void ProcessReleased() {
-        var g = GetComponent<Grabbable>();
-        var panel = g.GetPanelUnderneath();
-        if (panel != null) {
-            ObjectManager.Instance.GameManager.AttemptedWireSlotting(this, panel);
-        }
     }
 }
