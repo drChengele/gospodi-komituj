@@ -152,7 +152,7 @@ public class PanelSystem : InteractorTarget {
 
     private WireSlot GetFittingSlot(WireBehaviour wire) => wireSlots
                 .Where(slot => !slot.occupied)
-                .FirstOrDefault(slot => slot.wire == wire.wType);
+                .FirstOrDefault(slot => slot.wire == wire.wireType);
 
     void RegenerateWireSlots() {
         if(wireSlots != null) foreach (var slot in wireSlots) DeleteWireVisuals(slot.index);

@@ -12,16 +12,10 @@ public enum WireType
 
 [RequireComponent(typeof(Grabbable))]
 public class WireBehaviour : MonoBehaviour {
-
-    Vector3 vel;
-    Vector3 targetPos;
-    [SerializeField] float dampFactor;
-    bool inPlane = false;
-
-    public WireType wType;
+    
+    public WireType wireType { get; private set; }
     // Use this for initialization
     void Awake () {
-        targetPos = new Vector3(transform.localPosition.x, transform.localPosition.y, 0f);
         GetComponent<Grabbable>().HoldReleased += OnThisWasReleased;
 	}
 
@@ -30,18 +24,8 @@ public class WireBehaviour : MonoBehaviour {
         if (panel != null) ObjectManager.Instance.GameManager.AttemptedWireSlotting(this, panel);
     }
 
-    // Update is called once per frame
-    void Update () {
-        if (transform.localPosition.z > 0.001f)
-            MoveToZeroPlane();
-        else if (!inPlane) {
-            inPlane = true;
-            transform.localPosition = targetPos;
-            GetComponent<Rigidbody>().isKinematic = false;
-        }
-    }
-
-    void MoveToZeroPlane() {
-        transform.localPosition = Vector3.SmoothDamp(transform.localPosition, targetPos, ref vel, dampFactor);
+    internal void SetWireType(WireType type) {
+        wireType = type;
+        (GetComponent<WireColorizer>() ?? GetComponentInChildren<WireColorizer>())?.SetWireColor(wireType);
     }
 }

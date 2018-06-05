@@ -9,6 +9,9 @@ public class Interactor : MonoBehaviour {
         var all = Physics.RaycastAll(raycaster.position, raycaster.forward, 10f, ObjectManager.Instance.EngineeringController.interactionLayers);
         foreach (var hit in all) {
             var target = hit.collider.transform.parent.gameObject.GetComponent<InteractorTarget>();
+            if (target != null) {
+                Debug.Log($"Interactor target found: {target.name}");
+            }
             return target;
         }
         return null;

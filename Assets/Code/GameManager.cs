@@ -21,9 +21,9 @@ public class GameManager : MonoBehaviour {
 
         var functionalPanels = allPanels.Where(panel => panel.CurrentDamageState == DamageState.Operational).ToArray();
 
-        if (functionalPanels.Length == 0)
-            GameOver(false);
-        else 
+        if (functionalPanels.Length == 0) {
+            //GameOver(false);
+        } else
             functionalPanels[UnityEngine.Random.Range(0, functionalPanels.Length)].ChangeDamageState(DamageState.Malfunction);
     }
 
@@ -47,7 +47,9 @@ public class GameManager : MonoBehaviour {
     }
 
     internal void ShipPickedUpCanister(Canister canister) {
-        ObjectManager.Instance.WireSpawner.SpawnWire(canister.wireType);
+        // spawn 2 wires:
+        ObjectManager.Instance.WireSpawner.EnqueueWireSpawn(canister.wireType);
+        ObjectManager.Instance.WireSpawner.EnqueueWireSpawn(canister.wireType);
         canister.gameObject.SetActive(false); // maintainer will destroy it later, just hide it for now
     }
 
@@ -61,7 +63,7 @@ public class GameManager : MonoBehaviour {
 
     // called by panel
     internal void PanelBroken(PanelSystem panelSystem) {
-        
+        panelSystem.DefaultEnergy(50);
     }
 
     internal void PanelDestroyed(PanelSystem panelSystem) {
