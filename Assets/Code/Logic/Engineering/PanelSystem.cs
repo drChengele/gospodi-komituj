@@ -60,7 +60,7 @@ public class PanelSystem : InteractorTarget {
         }
     }
 
-    public void ActivateCharging()
+    public void DoCharge()
     {
         if (currentDamageState == DamageState.Malfunction && !isCharging) isCharging = true;
     }

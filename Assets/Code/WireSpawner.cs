@@ -20,7 +20,7 @@ public class WireSpawner : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.W)) {
+        if (Input.GetKeyDown(KeyCode.F9)) {
             EnqueueWireSpawn(Utility.GetRandomWire());
         }
 

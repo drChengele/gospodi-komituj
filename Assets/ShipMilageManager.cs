@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShipMilageManager : MonoBehaviour {
-
-    
-    public float score;
-    private float mileage;
+    public float Mileage { get; private set; }
     public float goalMileage;
     private bool goalReached = false;
 
@@ -15,6 +12,7 @@ public class ShipMilageManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        Mileage = 0;
         jamShipController = ship.GetComponent<JamShipController>();
 	}
 	
@@ -22,17 +20,17 @@ public class ShipMilageManager : MonoBehaviour {
 	void Update () {
         if (!goalReached)
         {
-            if (mileage < goalMileage) mileage += jamShipController.forwardSpeed * Time.deltaTime;
+            if (Mileage < goalMileage) Mileage += jamShipController.forwardSpeed * Time.deltaTime;
             else
             {
-                mileage = goalMileage;
+                Mileage = goalMileage;
                 goalReached = true;
                 ResolveGoalReached();
             }
         }
 	}
 
-    public float remaining => goalMileage - mileage;
+    public float remaining => goalMileage - Mileage;
 
     void ResolveGoalReached()
     {

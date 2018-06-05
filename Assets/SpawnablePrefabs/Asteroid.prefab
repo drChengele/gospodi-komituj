@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDistance: 300
   color: {r: 1, g: 0.19713613, b: 0, a: 0.2784314}
-  sprite: {fileID: 21300000, guid: 7d12979a330c7d3458a626e61560742b, type: 3}
+  kind: 1
 --- !u!114 &114889859415748320
 MonoBehaviour:
   m_ObjectHideFlags: 1

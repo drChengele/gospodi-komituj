@@ -9,7 +9,7 @@ public class Shield : ShipSystem {
     [SerializeField] GameObject shieldVisuals;
     [SerializeField] float minInvulnerabilityTime;
     float shieldUpTime;
-    public bool isInvulnerable = false;
+    public bool IsInvulnerable { get; private set; }
 
     // Use this for initialization
     
@@ -54,7 +54,7 @@ public class Shield : ShipSystem {
 
         if (shieldActive && shieldUpTime >= minInvulnerabilityTime)
         {
-            isInvulnerable = true;
+            IsInvulnerable = true;
             if (!shieldVisuals.activeInHierarchy) shieldVisuals.SetActive(true);
         }
     }
@@ -62,7 +62,7 @@ public class Shield : ShipSystem {
     void DeactivateShield()
     {
         shieldActive = false;
-        isInvulnerable = false;
+        IsInvulnerable = false;
         shieldUpTime = 0f;
         shieldVisuals.SetActive(false);
     }

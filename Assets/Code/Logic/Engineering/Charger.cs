@@ -14,6 +14,6 @@ public class Charger : MonoBehaviour {
 
     private void OnHoldResumed(Grabbable grabbable) {
         var panelToCharge = grabbable.GetComponent<Interactor>()?.GetInteractorTargetUnderneathMe() as PanelSystem;
-        panelToCharge?.ActivateCharging();
+        panelToCharge?.DoCharge();
     }
 }

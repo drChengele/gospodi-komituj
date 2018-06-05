@@ -753,7 +753,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 322010338}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &44280884
 MeshRenderer:
@@ -1721,7 +1721,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 322010338}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &219246628
 MeshRenderer:
@@ -1811,7 +1811,6 @@ MonoBehaviour:
   pilotController: {fileID: 1323623291}
   shieldVisuals: {fileID: 2132695732}
   minInvulnerabilityTime: 0.1
-  isInvulnerable: 0
 --- !u!1 &239750495
 GameObject:
   m_ObjectHideFlags: 0
@@ -2021,11 +2020,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 254472929}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.494, y: 0.754, z: 0}
+  m_LocalPosition: {x: 0.494, y: 0.754, z: -0.137}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 322010338}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &254472931
 MonoBehaviour:
@@ -2045,8 +2044,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 1c4cd88bb43b4954d967d2071c1750c5, type: 2}
   wireParent: {fileID: 739010276}
   wire: {fileID: 1220448351481792, guid: 22faa5a1d0786224da6d5b8eae545b7c, type: 2}
-  spawnOrigin: {fileID: 843200744}
   klapna: {fileID: 1312588466}
+  wireSpawnInterval: 2
   wirePrefabInSituFull: {fileID: 1648586163684268, guid: 64170039684b2c041a9c07ac0d511340,
     type: 2}
   wirePrefabInSituMalfunction: {fileID: 1556402725903278, guid: 67671e35a3663a742aaf5824c3ba4011,
@@ -2721,7 +2720,6 @@ Transform:
   - {fileID: 322010352}
   - {fileID: 322010349}
   - {fileID: 322010346}
-  - {fileID: 843200744}
   - {fileID: 254472930}
   - {fileID: 1312588465}
   - {fileID: 219246627}
@@ -2765,7 +2763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonFunction: 1
-  rechargeEnergyRate: 8
+  rechargeEnergyRate: 16
   visualMesh: {fileID: 1011619438}
   buttonPressDelta: {x: 0, y: 0.03, z: 0}
 --- !u!1 &322010341
@@ -2814,7 +2812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonFunction: 2
-  rechargeEnergyRate: 8
+  rechargeEnergyRate: 16
   visualMesh: {fileID: 1031726990}
   buttonPressDelta: {x: 0, y: 0.03, z: 0}
 --- !u!114 &322010344
@@ -2829,7 +2827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonFunction: 0
-  rechargeEnergyRate: 8
+  rechargeEnergyRate: 16
   visualMesh: {fileID: 1497681465}
   buttonPressDelta: {x: 0, y: 0.03, z: 0}
 --- !u!4 &322010345
@@ -3763,8 +3761,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 057e9e3fa5ecb754f8b36afc8092c0dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radarScreen: {fileID: 1370690294}
+  radarScreen: {fileID: 1822715376}
   radarStatusText: {fileID: 117319585}
+  radarIcons:
+  - {fileID: 21300000, guid: 7d12979a330c7d3458a626e61560742b, type: 3}
+  - {fileID: 21300000, guid: 7d12979a330c7d3458a626e61560742b, type: 3}
+  - {fileID: 21300000, guid: 7d12979a330c7d3458a626e61560742b, type: 3}
   randomRadarStrings:
   - Fuel running out
   - 'Current bounty: [BOUNTY]'
@@ -3783,7 +3785,13 @@ MonoBehaviour:
   - Enemy dreadnought detected
   - Entering asteroid field
   - Life support failing
-  radarFrequency: 0.15
+  - '[TRACKED] objects tracked'
+  cleanupFrequency: 1
+  radarUpdateStep: 5
+  radarImageColor: {r: 0.46226418, g: 0.102483094, b: 0.102483094, a: 0.73333335}
+  visibilitySpanHorizontal: 20
+  visibilityDistanceAhead: 180
+  generator: {fileID: 1858313833}
 --- !u!1001 &498551486
 Prefab:
   m_ObjectHideFlags: 0
@@ -4233,7 +4241,7 @@ Transform:
   - {fileID: 846415506}
   - {fileID: 11105893}
   m_Father: {fileID: 322010338}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &529985189
 Animator:
@@ -4266,7 +4274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energyDepletionRate: 2
   isPanel: 1
-  rechargeRate: 30
+  rechargeRate: 50
   currentDamageState: 0
   wireRoots:
   - {fileID: 2058068433}
@@ -4791,7 +4799,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 322010338}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &720339153
 MeshRenderer:
@@ -4865,7 +4873,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 322010338}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &720565943
 MeshRenderer:
@@ -5973,36 +5981,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &843200743
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1733822750014400, guid: 816f07dbb8ca4784c842ac74c840da1b,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 843200744}
-  m_Layer: 20
-  m_Name: WireSpawnPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &843200744
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4095066853953304, guid: 816f07dbb8ca4784c842ac74c840da1b,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 843200743}
-  m_LocalRotation: {x: -0, y: -0.00000037252894, z: -0, w: 1}
-  m_LocalPosition: {x: 0.563, y: 0.73925996, z: -1.873}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 322010338}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &846415505
 GameObject:
   m_ObjectHideFlags: 0
@@ -7095,7 +7073,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: debea0b0d7c79da4390662d4ff628dfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
   goalMileage: 10000
   ship: {fileID: 823081973}
 --- !u!1 &1071655953
@@ -7261,7 +7238,7 @@ Transform:
   - {fileID: 328462071}
   - {fileID: 249466422}
   m_Father: {fileID: 322010338}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1101926728
 MonoBehaviour:
@@ -7276,7 +7253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energyDepletionRate: 2
   isPanel: 1
-  rechargeRate: 30
+  rechargeRate: 50
   currentDamageState: 0
   wireRoots:
   - {fileID: 318419387}
@@ -8159,7 +8136,7 @@ Transform:
   m_Children:
   - {fileID: 322010345}
   m_Father: {fileID: 322010338}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1312588466
 Animator:
@@ -8792,6 +8769,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1370690298}
+  - {fileID: 1822715377}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9150,7 +9128,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 322010338}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1508585180
 MeshRenderer:
@@ -9561,7 +9539,7 @@ Transform:
   - {fileID: 1187293911}
   - {fileID: 1855528495}
   m_Father: {fileID: 322010338}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1544663843
 MonoBehaviour:
@@ -9576,7 +9554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energyDepletionRate: 2
   isPanel: 1
-  rechargeRate: 30
+  rechargeRate: 50
   currentDamageState: 0
   wireRoots:
   - {fileID: 1565180837}
@@ -9735,7 +9713,7 @@ MonoBehaviour:
     type: 2}
   particles_wireSparking: {fileID: 1292047831078228, guid: a2cc82503b422e84e82f1b84522df9d3,
     type: 2}
-  uiTriangle: {fileID: 1067917170408986, guid: c9f986059b519fd43915d9f9918a0e0b, type: 2}
+  radarImage: {fileID: 1566414911748370, guid: 1088582c7c668ac468edfa592dadbda8, type: 2}
 --- !u!1001 &1591733352
 Prefab:
   m_ObjectHideFlags: 0
@@ -10825,7 +10803,7 @@ Transform:
   - {fileID: 1982459871}
   - {fileID: 983939700}
   m_Father: {fileID: 322010338}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1751128900
 MonoBehaviour:
@@ -10840,7 +10818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energyDepletionRate: 2
   isPanel: 1
-  rechargeRate: 30
+  rechargeRate: 50
   currentDamageState: 0
   wireRoots:
   - {fileID: 670091451}
@@ -11282,6 +11260,34 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
   m_PrefabInternal: {fileID: 1818212439}
+--- !u!1 &1822715376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1822715377}
+  m_Layer: 0
+  m_Name: Radar Images
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1822715377
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1822715376}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.787}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1404004217}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1822961436
 GameObject:
   m_ObjectHideFlags: 0
@@ -11637,10 +11643,10 @@ MonoBehaviour:
   createWhat:
   - {fileID: 1198102269932084, guid: ebf4f69976e4a9341a7c14bb1959577e, type: 2}
   scaleVariance: 0.5
-  density: 350
-  maxSpawnsPerFrame: 9
-  minSlicesForCanister: 10
-  maxSlicesForCanister: 19
+  density: 400
+  maxSpawnsPerFrame: 11
+  minSlicesForCanister: 3
+  maxSlicesForCanister: 7
   canisterPrefab: {fileID: 1916489915785880, guid: 3fcb981aa09dcbc42a409b39c643834c,
     type: 2}
   canisterSpawnRadius: 12

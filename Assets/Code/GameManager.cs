@@ -5,9 +5,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public void ProcessAsteroidShipCollision(GameObject asteroid ) {
+        if (ObjectManager.Instance.ShipSystems.Shield.IsInvulnerable) {
+            asteroid.SetActive(false);
+        } else {            
+            DamageRandomShipSystem();
+            // todo: shake up electronics
+        }
         ObjectManager.Instance.CockpitEffects.AddCockpitShake(6f);
-        // todo: shake up electronics
-        DamageRandomShipSystem();
     }
 
     public void ProcessBulletAsteroidCollision(GameObject bullet, GameObject asteroid) {
@@ -47,8 +51,6 @@ public class GameManager : MonoBehaviour {
     }
 
     internal void ShipPickedUpCanister(Canister canister) {
-        // spawn 2 wires:
-        ObjectManager.Instance.WireSpawner.EnqueueWireSpawn(canister.wireType);
         ObjectManager.Instance.WireSpawner.EnqueueWireSpawn(canister.wireType);
         canister.gameObject.SetActive(false); // maintainer will destroy it later, just hide it for now
     }

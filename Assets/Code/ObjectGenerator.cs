@@ -8,6 +8,8 @@ public class ObjectGenerator : MonoBehaviour {
 
     private HashSet<GameObject> maintainedObjects = new HashSet<GameObject>();
 
+    public event Action<GameObject> ObjectGenerated;
+
     // by definition, generation is on the Z axis
      
     [SerializeField] Transform solipsist;
@@ -73,6 +75,7 @@ public class ObjectGenerator : MonoBehaviour {
             var firstCanisterInstance = Instantiate(canisterPrefab);
             firstCanisterInstance.transform.position = worldCoords + offset * i;
             maintainedObjects.Add(firstCanisterInstance);
+            ObjectGenerated?.Invoke(firstCanisterInstance);
         }
      
     }
@@ -157,6 +160,7 @@ public class ObjectGenerator : MonoBehaviour {
         spawnedObject.transform.position = info.coords;
         spawnedObject.transform.localScale *= UnityEngine.Random.Range(1f - scaleVariance, 1f + scaleVariance);
         spawnedObject.transform.localRotation = Utility.GetRandomRotation();
+        ObjectGenerated?.Invoke(spawnedObject);
         maintainedObjects.Add(spawnedObject);
     }
 }

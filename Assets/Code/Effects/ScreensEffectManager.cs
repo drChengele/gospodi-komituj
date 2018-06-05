@@ -9,32 +9,49 @@ public class ScreensEffectManager : MonoBehaviour {
     public GameObject radarScreen;
     public Text radarStatusText;
 
+    [SerializeField] Sprite[] radarIcons;
+
     [SerializeField] string[] randomRadarStrings;
-    [SerializeField] float radarFrequency;
+    [SerializeField] float cleanupFrequency;
+
+    [SerializeField] int radarUpdateStep;
 
     string currentRadarString;
 
     private void Awake() {
         InvokeRepeating("CycleRadarStatus", 3f, 3f);
-        InvokeRepeating("UpdateRadarObjects", radarFrequency, radarFrequency);
+        InvokeRepeating("CleanupRadarObjects", cleanupFrequency, cleanupFrequency);
         CycleRadarStatus();
-    }
-    private void Update() {
-        UpdateRadar();
+        generator.ObjectGenerated += OnGeneratorObjectGenerated;
     }
 
-    private void UpdateRadar() {
+    private void OnGeneratorObjectGenerated(GameObject obj) {
+        var rvo = obj.GetComponent<RadarVisibleObject>();
+        if (rvo != null) trackedObjects.Add(rvo);
+    }
+
+    int framecounter = 0;
+
+    private void Update() {
+        UpdateRadarString();
+        framecounter++;
+        UpdateRadarObjectsSubset(radarUpdateStep, framecounter % radarUpdateStep);
+    }
+
+    private void UpdateRadarString() {
         radarStatusText.text = Process(currentRadarString);
+        //radarStatusText.text = $"{trackedObjects.Count} objects tracked";
     }
 
     string Process(string radarString) {
         var txt = radarString;
         var mm = FindObjectOfType<ShipMilageManager>();
+        txt = txt.Replace("[TRACKED]", $"{trackedObjects.Count} objects tracked");
         txt = txt.Replace("[DIST]", mm.remaining.ToString());
-        txt = txt.Replace("[BOUNTY]", (mm.score * 13).ToString("$"));
-        txt = txt.Replace("[WEAPONCHARGE]", $"{(int)(100 * ObjectManager.Instance.ShipSystems.Weapon.CurrentEnergy)}%" );
-        txt = txt.Replace("[SHIELDCHARGE]", $"{(int)(100 * ObjectManager.Instance.ShipSystems.Shield.CurrentEnergy)}%");
-        txt = txt.Replace("[ENGINECHARGE]", $"{(int)(100 * ObjectManager.Instance.ShipSystems.Engine.CurrentEnergy)}%");
+        txt = txt.Replace("[BOUNTY]", (mm.Mileage * 13).ToString("$"));
+        txt = txt.Replace("[WEAPONCHARGE]", $"{(int)(ObjectManager.Instance.ShipSystems.Weapon.CurrentEnergy)}%" );
+        txt = txt.Replace("[SHIELDCHARGE]", $"{(int)(ObjectManager.Instance.ShipSystems.Shield.CurrentEnergy)}%");
+        txt = txt.Replace("[ENGINECHARGE]", $"{(int)(ObjectManager.Instance.ShipSystems.Engine.CurrentEnergy)}%");
         txt = txt.Replace("[REACTORTEMP]", "1 500 000 K");
 
         return txt;
@@ -43,8 +60,71 @@ public class ScreensEffectManager : MonoBehaviour {
     void CycleRadarStatus() {
         currentRadarString = randomRadarStrings[UnityEngine.Random.Range(0, randomRadarStrings.Length)];
     }
-    
-    void UpdateRadarObjects() {
-       
+
+    void UpdateRadarObjectsSubset(int step, int offset) {
+        if (trackedObjectsArray == null)
+            return;
+
+        for (var i = offset; i < trackedObjectsArray.Length; i+= step ) {
+            AddOrUpdateObjectGraphic(trackedObjectsArray[i]);
+        }
     }
+
+    void CleanupRadarObjects() {
+        var toRemove = trackedObjects.Where(obj => obj == null);
+        foreach (var item in toRemove) RemoveObjectGraphic(item);
+        trackedObjects.RemoveWhere(obj => obj == null);
+        trackedObjectsArray = trackedObjects.ToArray();
+    }
+
+    Dictionary<RadarVisibleObject, SpriteRenderer> maintainedGraphics = new Dictionary<RadarVisibleObject, SpriteRenderer>();
+
+    void AddOrUpdateObjectGraphic(RadarVisibleObject radarVisibleObject) {
+        if (radarVisibleObject == null) return;
+        SpriteRenderer graphic;
+        if (!maintainedGraphics.TryGetValue(radarVisibleObject, out graphic)) {
+            var go = Instantiate(ObjectManager.Instance.Prefabs.radarImage);
+            go.transform.parent = radarScreen.transform;
+            maintainedGraphics[radarVisibleObject] = graphic = go.GetComponent<SpriteRenderer>();
+            //graphic.transform.localRotation = Quaternion.Euler(0, 0, 180);
+            graphic.color = radarImageColor;
+        }        
+        var relativePosition = ObjectManager.Instance.ShipController.transform.InverseTransformPoint(radarVisibleObject.transform.position);
+        radarVisibleObject.lastRelativePosition = relativePosition;
+
+        graphic.transform.localScale = Vector3.one;
+        graphic.enabled = ShouldBeVisible(radarVisibleObject);
+        if (graphic.enabled) {
+            float xFactor = 4f;
+            xFactor *= 50f / relativePosition.z;
+            graphic.transform.localPosition = new Vector3(relativePosition.x, relativePosition.y, 0f) * xFactor / visibilitySpanHorizontal;            
+            graphic.transform.localScale = Vector3.one * (1f - relativePosition.z / visibilityDistanceAhead);
+        }
+    }
+
+    [SerializeField] Color radarImageColor;
+
+    bool ShouldBeVisible(RadarVisibleObject item) {
+        return Mathf.Abs(item.lastRelativePosition.x) < visibilitySpanHorizontal
+            && Mathf.Abs(item.lastRelativePosition.y) < visibilitySpanHorizontal
+            && item.lastRelativePosition.z < visibilityDistanceAhead
+            && item.lastRelativePosition.z > 0f;
+
+    }
+
+    [SerializeField] float visibilitySpanHorizontal;
+    [SerializeField] float visibilityDistanceAhead;
+
+    void RemoveObjectGraphic(RadarVisibleObject item) {
+        SpriteRenderer sr;
+        if (maintainedGraphics.TryGetValue(item, out sr)) {
+            Destroy(sr.gameObject);
+            maintainedGraphics.Remove(item);
+        }
+    }
+
+    [SerializeField] ObjectGenerator generator;
+
+    HashSet<RadarVisibleObject> trackedObjects = new HashSet<RadarVisibleObject>();
+    RadarVisibleObject[] trackedObjectsArray;
 }
