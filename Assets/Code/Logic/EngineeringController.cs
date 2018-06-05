@@ -46,7 +46,7 @@ public class EngineeringController : MonoBehaviour {
             var angle = 90f * Mathf.Sign(currentRollSpeed);
             var tangent = Utility.RotateVector(new Vector2(rigidbody.transform.localPosition.x, rigidbody.transform.localPosition.y), angle).normalized;
             var forceRatio = rigidbody.transform.localPosition.magnitude / coriolisFudgeFactor;
-            var coriolisForce = new Vector3(tangent.x, tangent.y, 0f) * Mathf.Abs(currentRollSpeed) * forceRatio * Time.fixedDeltaTime;
+            var coriolisForce = new Vector3(tangent.x, tangent.y, 0f) * Mathf.Abs(currentRollSpeed) * forceRatio * Time.fixedDeltaTime * -1f;
             rigidbody.AddForce(coriolisForce, ForceMode.Acceleration);
             
         }
