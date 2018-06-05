@@ -97,9 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa5deca87072d064288ca9008afbb916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistance: 300
-  color: {r: 1, g: 0.19713613, b: 0, a: 0.2784314}
-  kind: 1
+  kind: 0
 --- !u!114 &114889859415748320
 MonoBehaviour:
   m_ObjectHideFlags: 1

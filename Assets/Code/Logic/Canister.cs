@@ -33,4 +33,10 @@ static public partial class Utility {
         if (diceRoll == 3) return WireType.Purple;
         return WireType.Purple;
     }
+
+    static public float ProjectNumbers(float fromMin, float fromMax, float toMin, float toMax, float value, bool clamp = true) {
+        var t = Mathf.InverseLerp(fromMin, fromMax, value);
+        if (clamp) t = Mathf.Clamp01(t);
+        return Mathf.Lerp(toMin, toMax, t);
+    }
 }

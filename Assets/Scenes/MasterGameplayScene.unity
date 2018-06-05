@@ -1614,6 +1614,56 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: d19b3b5f43cb7f749b7eb119389064d7, type: 3}
   m_PrefabInternal: {fileID: 182093780}
+--- !u!1001 &202703926
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 25566466}
+    m_Modifications:
+    - target: {fileID: 4444190867888828, guid: cf4ca513d356fee41ac4f771d06bdf3b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -16.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444190867888828, guid: cf4ca513d356fee41ac4f771d06bdf3b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.05000305
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444190867888828, guid: cf4ca513d356fee41ac4f771d06bdf3b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.455
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444190867888828, guid: cf4ca513d356fee41ac4f771d06bdf3b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444190867888828, guid: cf4ca513d356fee41ac4f771d06bdf3b, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444190867888828, guid: cf4ca513d356fee41ac4f771d06bdf3b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444190867888828, guid: cf4ca513d356fee41ac4f771d06bdf3b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444190867888828, guid: cf4ca513d356fee41ac4f771d06bdf3b, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444190867888828, guid: cf4ca513d356fee41ac4f771d06bdf3b, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444190867888828, guid: cf4ca513d356fee41ac4f771d06bdf3b, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: cf4ca513d356fee41ac4f771d06bdf3b, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &204382084
 Prefab:
   m_ObjectHideFlags: 0
@@ -3764,9 +3814,15 @@ MonoBehaviour:
   radarScreen: {fileID: 1822715376}
   radarStatusText: {fileID: 117319585}
   radarIcons:
-  - {fileID: 21300000, guid: 7d12979a330c7d3458a626e61560742b, type: 3}
-  - {fileID: 21300000, guid: 7d12979a330c7d3458a626e61560742b, type: 3}
-  - {fileID: 21300000, guid: 7d12979a330c7d3458a626e61560742b, type: 3}
+  - color: {r: 0.99215686, g: 0.105882354, b: 0.0627451, a: 0.8235294}
+    scale: 1
+    icon: {fileID: 21300000, guid: c233167414a713d4f9aafd7e7cadf504, type: 3}
+  - color: {r: 3.1623034, g: 3.5811515, b: 3.9999995, a: 1}
+    scale: 1.4
+    icon: {fileID: 21300004, guid: c233167414a713d4f9aafd7e7cadf504, type: 3}
+  - color: {r: 0, g: 0, b: 0, a: 0}
+    scale: 0
+    icon: {fileID: 0}
   randomRadarStrings:
   - Fuel running out
   - 'Current bounty: [BOUNTY]'
@@ -3787,8 +3843,7 @@ MonoBehaviour:
   - Life support failing
   - '[TRACKED] objects tracked'
   cleanupFrequency: 1
-  radarUpdateStep: 5
-  radarImageColor: {r: 0.46226418, g: 0.102483094, b: 0.102483094, a: 0.73333335}
+  radarUpdateStep: 4
   visibilitySpanHorizontal: 20
   visibilityDistanceAhead: 180
   generator: {fileID: 1858313833}
@@ -13535,7 +13590,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 25566466}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
 --- !u!1001 &2128358490
 Prefab:

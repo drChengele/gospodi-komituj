@@ -9,7 +9,14 @@ public class ScreensEffectManager : MonoBehaviour {
     public GameObject radarScreen;
     public Text radarStatusText;
 
-    [SerializeField] Sprite[] radarIcons;
+    [Serializable]
+    public class RadarObjectDisplay {
+        [ColorUsage(true, true)]public Color color;
+        public float scale;
+        public Sprite icon;
+    }
+
+    [SerializeField] RadarObjectDisplay[] radarIcons;
 
     [SerializeField] string[] randomRadarStrings;
     [SerializeField] float cleanupFrequency;
@@ -48,7 +55,7 @@ public class ScreensEffectManager : MonoBehaviour {
         var mm = FindObjectOfType<ShipMilageManager>();
         txt = txt.Replace("[TRACKED]", $"{trackedObjects.Count} objects tracked");
         txt = txt.Replace("[DIST]", mm.remaining.ToString());
-        txt = txt.Replace("[BOUNTY]", (mm.Mileage * 13).ToString("$"));
+        txt = txt.Replace("[BOUNTY]", ((int)mm.Mileage * 13).ToString());
         txt = txt.Replace("[WEAPONCHARGE]", $"{(int)(ObjectManager.Instance.ShipSystems.Weapon.CurrentEnergy)}%" );
         txt = txt.Replace("[SHIELDCHARGE]", $"{(int)(ObjectManager.Instance.ShipSystems.Shield.CurrentEnergy)}%");
         txt = txt.Replace("[ENGINECHARGE]", $"{(int)(ObjectManager.Instance.ShipSystems.Engine.CurrentEnergy)}%");
@@ -87,7 +94,8 @@ public class ScreensEffectManager : MonoBehaviour {
             go.transform.parent = radarScreen.transform;
             maintainedGraphics[radarVisibleObject] = graphic = go.GetComponent<SpriteRenderer>();
             //graphic.transform.localRotation = Quaternion.Euler(0, 0, 180);
-            graphic.color = radarImageColor;
+            graphic.color = radarIcons[radarVisibleObject.kind].color;
+            graphic.sprite = radarIcons[radarVisibleObject.kind].icon;
         }        
         var relativePosition = ObjectManager.Instance.ShipController.transform.InverseTransformPoint(radarVisibleObject.transform.position);
         radarVisibleObject.lastRelativePosition = relativePosition;
@@ -95,14 +103,15 @@ public class ScreensEffectManager : MonoBehaviour {
         graphic.transform.localScale = Vector3.one;
         graphic.enabled = ShouldBeVisible(radarVisibleObject);
         if (graphic.enabled) {
+            var data = radarIcons[radarVisibleObject.kind];
             float xFactor = 4f;
-            xFactor *= 50f / relativePosition.z;
+            // simulate enlargement through distance
+            var dist = relativePosition.z;
+            xFactor *= Utility.ProjectNumbers(0, visibilityDistanceAhead, 1.2f, 0.2f, dist);
             graphic.transform.localPosition = new Vector3(relativePosition.x, relativePosition.y, 0f) * xFactor / visibilitySpanHorizontal;            
-            graphic.transform.localScale = Vector3.one * (1f - relativePosition.z / visibilityDistanceAhead);
+            graphic.transform.localScale = Vector3.one * data.scale * (1f - relativePosition.z / visibilityDistanceAhead);
         }
     }
-
-    [SerializeField] Color radarImageColor;
 
     bool ShouldBeVisible(RadarVisibleObject item) {
         return Mathf.Abs(item.lastRelativePosition.x) < visibilitySpanHorizontal
