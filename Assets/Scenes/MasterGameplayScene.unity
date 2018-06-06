@@ -6110,6 +6110,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 823081974}
+  - component: {fileID: 823081975}
   - component: {fileID: 823081976}
   - component: {fileID: 823081977}
   m_Layer: 22
@@ -6134,6 +6135,23 @@ Transform:
   m_Father: {fileID: 303067769}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &823081975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 823081973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8717585c93d9b8e49b96d63fd786f716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  systems: {fileID: 0}
+  thrustPower: 45
+  rollPower: 600
+  maxRollSpeed: 120
+  forwardSpeed: 60
+  inertiaRetain: 0.96
 --- !u!54 &823081976
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6155,7 +6173,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 823081973}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1aabf01868a91ff47b9f9ee1138de8fd, type: 3}
   m_Name: 
