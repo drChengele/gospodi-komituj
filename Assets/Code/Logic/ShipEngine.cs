@@ -5,7 +5,7 @@ public class ShipEngine : ShipSystem {
     Vector2 thrustSignal;
     float rollSignal;
 
-    public IEngineEffector EngineEffector => ObjectManager.Instance.ShipController;
+    public IEngineEffector EngineEffector => ObjectManager.Instance.ShipController as IEngineEffector;
 
     internal override void UpdateFrameLogic() {
         base.UpdateFrameLogic();
@@ -24,7 +24,7 @@ public class ShipEngine : ShipSystem {
         if (expenditure > 1f) expenditure = 1f;
         TryChangeCurrentEnergy(-expenditure * energyDepletionRate * Time.deltaTime);
         if (CurrentEnergy > float.Epsilon) {
-            EngineEffector.ApplyThrust(thrustSignal);
+            EngineEffector.ApplyLateralThrust(thrustSignal);
             EngineEffector.ApplyRoll(rollSignal);
         }
     }
@@ -34,5 +34,5 @@ public interface IEngineEffector {
     void ApplyRoll(float roll);
 
     /// <summary>Expects thrust vector NOT GREATER THAN ONE</summary>
-    void ApplyThrust(Vector2 thrust);
+    void ApplyLateralThrust(Vector2 thrust);
 }

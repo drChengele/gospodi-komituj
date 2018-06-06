@@ -4,7 +4,11 @@ using System.Linq;
 using UnityEngine;
 
 
-public class ObjectGenerator : MonoBehaviour {
+public interface IObjectGenerator {
+    event Action<GameObject> ObjectGenerated;
+}
+
+public class ObjectGenerator : MonoBehaviour, IObjectGenerator {
 
     private HashSet<GameObject> maintainedObjects = new HashSet<GameObject>();
 
@@ -37,7 +41,7 @@ public class ObjectGenerator : MonoBehaviour {
 
     int slicesTilCanister = 0;
 
-    private void Awake() {
+    private void Start() {
         FirstGeneration();
     }
 
@@ -101,6 +105,8 @@ public class ObjectGenerator : MonoBehaviour {
             var item = createWhat[UnityEngine.Random.Range(0, createWhat.Length)];
             EnqueueSpawnObject(new ObjectSpawnInfo(item, UnityEngine.Random.Range(zStart, zEnd)));
         }
+
+        Debug.Log($"Object generator objects generated: {numToSpawn}");
 
         maxGeneratedDepth = zEnd;
     }

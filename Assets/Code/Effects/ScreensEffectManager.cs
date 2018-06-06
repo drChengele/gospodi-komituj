@@ -29,7 +29,14 @@ public class ScreensEffectManager : MonoBehaviour {
         InvokeRepeating("CycleRadarStatus", 3f, 3f);
         InvokeRepeating("CleanupRadarObjects", cleanupFrequency, cleanupFrequency);
         CycleRadarStatus();
-        generator.ObjectGenerated += OnGeneratorObjectGenerated;
+        foreach (var generator in FindAllGenerators()) {
+            generator.ObjectGenerated += OnGeneratorObjectGenerated;
+        }
+
+    }
+
+    IEnumerable<IObjectGenerator> FindAllGenerators() {
+        return FindObjectsOfType<GameObject>().SelectMany(go => go.GetComponents<IObjectGenerator>());
     }
 
     private void OnGeneratorObjectGenerated(GameObject obj) {
@@ -97,7 +104,7 @@ public class ScreensEffectManager : MonoBehaviour {
             graphic.color = radarIcons[radarVisibleObject.kind].color;
             graphic.sprite = radarIcons[radarVisibleObject.kind].icon;
         }        
-        var relativePosition = ObjectManager.Instance.ShipController.transform.InverseTransformPoint(radarVisibleObject.transform.position);
+        var relativePosition = ObjectManager.Instance.ShipController.GameObject.transform.InverseTransformPoint(radarVisibleObject.transform.position);
         radarVisibleObject.lastRelativePosition = relativePosition;
 
         graphic.transform.localScale = Vector3.one;
