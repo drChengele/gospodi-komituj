@@ -14,6 +14,7 @@ public class ParticleSlots : MonoBehaviour {
     private void Awake() {
         foreach (var system in systems) {
             system.Stop();
+
         }
     }
 
