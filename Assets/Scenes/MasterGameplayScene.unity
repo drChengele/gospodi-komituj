@@ -548,7 +548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839e93900ca177a4c8b264d0799e87c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipController: {fileID: 823081975}
+  shipController: {fileID: 823081973}
   pilotController: {fileID: 1323623291}
   engineeringCamera: {fileID: 730732544}
   cockpitCamera: {fileID: 282840813}
@@ -6110,7 +6110,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 823081974}
-  - component: {fileID: 823081975}
   - component: {fileID: 823081976}
   - component: {fileID: 823081977}
   m_Layer: 22
@@ -6135,23 +6134,6 @@ Transform:
   m_Father: {fileID: 303067769}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &823081975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 823081973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8717585c93d9b8e49b96d63fd786f716, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  systems: {fileID: 906935813}
-  thrustPower: 45
-  rollPower: 270
-  maxRollSpeed: 120
-  forwardSpeed: 60
-  inertiaRetain: 0.96
 --- !u!54 &823081976
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6173,7 +6155,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 823081973}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1aabf01868a91ff47b9f9ee1138de8fd, type: 3}
   m_Name: 

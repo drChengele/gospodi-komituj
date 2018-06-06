@@ -18,6 +18,7 @@ public class ShipMilageManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (jamShipController == null) return;
         if (!goalReached)
         {
             if (Mileage < goalMileage) Mileage += jamShipController.forwardSpeed * Time.deltaTime;
