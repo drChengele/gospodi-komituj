@@ -21,7 +21,7 @@ public interface IObjectManager {
 
 public class ObjectManager : MonoBehaviour, IObjectManager {
 
-    [SerializeField] SixDofShipController shipController;
+    [SerializeField] JamShipController shipController;
     [SerializeField] PilotController pilotController;
     [SerializeField] Camera engineeringCamera;
     [SerializeField] Camera cockpitCamera;
