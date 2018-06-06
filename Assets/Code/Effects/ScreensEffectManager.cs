@@ -13,6 +13,9 @@ public class ScreensEffectManager : MonoBehaviour {
     public class RadarObjectDisplay {
         [ColorUsage(true, true)]public Color color;
         public float scale;
+        public bool fixedScale;
+        public bool blinking;
+        public float detectionDistanceMultiplier;
         public Sprite icon;
     }
 
@@ -91,39 +94,47 @@ public class ScreensEffectManager : MonoBehaviour {
         trackedObjectsArray = trackedObjects.ToArray();
     }
 
-    Dictionary<RadarVisibleObject, SpriteRenderer> maintainedGraphics = new Dictionary<RadarVisibleObject, SpriteRenderer>();
+    Dictionary<RadarVisibleObject, RadarBlip> maintainedGraphics = new Dictionary<RadarVisibleObject, RadarBlip>();
 
     void AddOrUpdateObjectGraphic(RadarVisibleObject radarVisibleObject) {
         if (radarVisibleObject == null) return;
-        SpriteRenderer graphic;
-        if (!maintainedGraphics.TryGetValue(radarVisibleObject, out graphic)) {
+        RadarBlip blip;
+        if (!maintainedGraphics.TryGetValue(radarVisibleObject, out blip)) {
             var go = Instantiate(ObjectManager.Instance.Prefabs.radarImage);
             go.transform.parent = radarScreen.transform;
-            maintainedGraphics[radarVisibleObject] = graphic = go.GetComponent<SpriteRenderer>();
-            //graphic.transform.localRotation = Quaternion.Euler(0, 0, 180);
-            graphic.color = radarIcons[radarVisibleObject.kind].color;
-            graphic.sprite = radarIcons[radarVisibleObject.kind].icon;
-        }        
+            blip = go.GetComponent<RadarBlip>();
+            maintainedGraphics[radarVisibleObject] = blip;
+            blip.AddToRadar(radarVisibleObject, radarIcons[radarVisibleObject.kind]);            
+        }
+
+        float mul = radarIcons[radarVisibleObject.kind].detectionDistanceMultiplier;
         var relativePosition = ObjectManager.Instance.ShipController.GameObject.transform.InverseTransformPoint(radarVisibleObject.transform.position);
+        relativePosition /= mul;
         radarVisibleObject.lastRelativePosition = relativePosition;
 
-        graphic.transform.localScale = Vector3.one;
-        graphic.enabled = ShouldBeVisible(radarVisibleObject);
-        if (graphic.enabled) {
+        blip.transform.localScale = Vector3.one;
+        var enabled = ShouldBeVisible(radarVisibleObject);
+        blip.SpriteRenderer.enabled = enabled;
+        if (enabled) {
             var data = radarIcons[radarVisibleObject.kind];
             float xFactor = 4f;
             // simulate enlargement through distance
             var dist = relativePosition.z;
-            xFactor *= Utility.ProjectNumbers(0, visibilityDistanceAhead, 1.2f, 0.2f, dist);
-            graphic.transform.localPosition = new Vector3(relativePosition.x, relativePosition.y, 0f) * xFactor / visibilitySpanHorizontal;            
-            graphic.transform.localScale = Vector3.one * data.scale * (1f - relativePosition.z / visibilityDistanceAhead);
+            xFactor *= Utility.ProjectNumbers(0, visibilityDistanceAhead * mul, 1.2f, 0.2f, dist);
+            blip.transform.localPosition = new Vector3(relativePosition.x, relativePosition.y, 0f) * xFactor / visibilitySpanHorizontal;
+            var scale = Vector3.one * data.scale;
+            if (!data.fixedScale) scale *= 1f - relativePosition.z / visibilityDistanceAhead;
+            blip.transform.localScale = scale;
         }
     }
 
     bool ShouldBeVisible(RadarVisibleObject item) {
-        return Mathf.Abs(item.lastRelativePosition.x) < visibilitySpanHorizontal
-            && Mathf.Abs(item.lastRelativePosition.y) < visibilitySpanHorizontal
-            && item.lastRelativePosition.z < visibilityDistanceAhead
+
+        float mul = radarIcons[item.kind].detectionDistanceMultiplier;
+
+        return Mathf.Abs(item.lastRelativePosition.x) < visibilitySpanHorizontal * mul
+            && Mathf.Abs(item.lastRelativePosition.y) < visibilitySpanHorizontal * mul
+            && item.lastRelativePosition.z < visibilityDistanceAhead * mul
             && item.lastRelativePosition.z > 0f;
 
     }
@@ -132,9 +143,9 @@ public class ScreensEffectManager : MonoBehaviour {
     [SerializeField] float visibilityDistanceAhead;
 
     void RemoveObjectGraphic(RadarVisibleObject item) {
-        SpriteRenderer sr;
-        if (maintainedGraphics.TryGetValue(item, out sr)) {
-            Destroy(sr.gameObject);
+        RadarBlip blip;
+        if (maintainedGraphics.TryGetValue(item, out blip)) {
+            Destroy(blip.gameObject);
             maintainedGraphics.Remove(item);
         }
     }

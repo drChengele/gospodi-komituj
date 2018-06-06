@@ -69,6 +69,7 @@ public class ObjectGenerator : MonoBehaviour, IObjectGenerator {
 
     private void SpawnCanisters(float atZ) {
 
+        Debug.Log($"Spawning canisters at z {atZ}");
         var yOffset = UnityEngine.Random.Range(-1f, 1f) * canisterSpawnRadius;
         var xOffset = UnityEngine.Random.Range(-1f, 1f) * canisterSpawnRadius;
         var worldCoords = solipsist.transform.position + new Vector3(xOffset, yOffset, atZ);
@@ -81,6 +82,7 @@ public class ObjectGenerator : MonoBehaviour, IObjectGenerator {
             maintainedObjects.Add(firstCanisterInstance);
             ObjectGenerated?.Invoke(firstCanisterInstance);
         }
+        
      
     }
 

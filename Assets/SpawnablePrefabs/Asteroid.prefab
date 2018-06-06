@@ -122,8 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleSpeed: 6
-  scaleMin: 1.5
-  scaleMax: 3
+  scaleMin: 1
+  scaleMax: 1.5
 --- !u!136 &136267085148697942
 CapsuleCollider:
   m_ObjectHideFlags: 1

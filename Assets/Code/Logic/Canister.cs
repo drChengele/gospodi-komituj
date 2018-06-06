@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Canister : MonoBehaviour {
     public WireType wireType;
+    public float lightIntensity;
 
     private void Awake() {
         wireType = Utility.GetRandomWire();
@@ -11,7 +12,9 @@ public class Canister : MonoBehaviour {
 
     private void UpdateMaterialColor() {
         var material = GetComponent<MeshRenderer>().material;
-        material.color = GetColorFromWire(wireType);
+        var color = GetColorFromWire(wireType);
+        material.color = color;
+        material.SetColor("_EmissionColor", color * lightIntensity);
     }
 
     Color GetColorFromWire(WireType wire) {

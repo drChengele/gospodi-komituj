@@ -59,7 +59,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 036f0feffca9b864baeae31709fc6a79, type: 2}
+  - {fileID: 2100000, guid: 19022fb29720f934a9da6cb550dad5b1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wireType: 0
+  lightIntensity: 1.6

@@ -40,9 +40,9 @@ public class GameManager : MonoBehaviour {
 
     internal void AsteroidWasHitByBullet(Bullet bullet, GameObject asteroid) {
         Debug.Log("ASTEROID HIT BY BULLIT");
+        Instantiate(ObjectManager.Instance.Prefabs.particles_asteroidExplosion, bullet.transform.position, Quaternion.identity);
         asteroid.SetActive(false);
         bullet.DieSoon();
-        Instantiate(ObjectManager.Instance.Prefabs.particles_asteroidExplosion, bullet.transform.position, Quaternion.identity);
     }
 
     internal void CanisterWasHitByBullet(Bullet bullet, GameObject canister) {

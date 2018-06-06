@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4013555687619728}
   - component: {fileID: 212290263982863242}
+  - component: {fileID: 114404429934072092}
   m_Layer: 5
   m_Name: Radar Image
   m_TagString: Untagged
@@ -40,6 +41,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114404429934072092
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1566414911748370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa354432b4a6b548b3a6c2c12dc4269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinking: 0
 --- !u!212 &212290263982863242
 SpriteRenderer:
   m_ObjectHideFlags: 1
