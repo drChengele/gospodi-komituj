@@ -62,10 +62,14 @@ public class ScreensEffectManager : MonoBehaviour {
 
     string Process(string radarString) {
         var txt = radarString;
+        
         var mm = FindObjectOfType<ShipMilageManager>();
-        txt = txt.Replace("[TRACKED]", $"{trackedObjects.Count}");
-        txt = txt.Replace("[DIST]", mm.remaining.ToString());
-        txt = txt.Replace("[BOUNTY]", ((int)mm.Mileage * 13).ToString());
+        if (mm != null ) {
+            txt = txt.Replace("[DIST]", mm.remaining.ToString());
+            txt = txt.Replace("[BOUNTY]", ((int)mm.Mileage * 13).ToString());
+        }
+
+        txt = txt.Replace("[TRACKED]", $"{trackedObjects.Count}");        
         txt = txt.Replace("[WEAPONCHARGE]", $"{(int)(ObjectManager.Instance.ShipSystems.Weapon.CurrentEnergy)}%" );
         txt = txt.Replace("[SHIELDCHARGE]", $"{(int)(ObjectManager.Instance.ShipSystems.Shield.CurrentEnergy)}%");
         txt = txt.Replace("[ENGINECHARGE]", $"{(int)(ObjectManager.Instance.ShipSystems.Engine.CurrentEnergy)}%");

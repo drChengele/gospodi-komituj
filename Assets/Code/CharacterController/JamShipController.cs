@@ -67,6 +67,10 @@ public class JamShipController : MonoBehaviour, IShipController, IEngineEffector
         currentVelocity += transformedVector * Time.fixedDeltaTime;
     }
 
+    public void ApplyForwardThrust(float thrust) {
+        // do nothing, we go forward all the time baby
+    }
+
     void ApplyVelocity() {
         FixVelocity();
         transform.position += CurrentVelocity * Time.deltaTime;

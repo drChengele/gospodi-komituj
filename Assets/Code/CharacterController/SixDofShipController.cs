@@ -5,8 +5,11 @@ using UnityEngine;
 public class SixDofShipController : MonoBehaviour, IShipController, IEngineEffector, IInertiaProvider {
     public ShipSystems systems;
 
-    [Range(2f, 120f)]
-    public float forwardThrust;
+    [Range(2f, 300f)]
+    public float forwardBoost;
+
+    [Range(2f, 100f)]
+    public float constantThrust;
 
     [Range(20f, 600f)] public float rollPower;
     [Range(20f, 600f)] public float pitchPower;
@@ -48,12 +51,12 @@ public class SixDofShipController : MonoBehaviour, IShipController, IEngineEffec
     }
 
     void FixedUpdate() {
-        BoostUncontrollably();
+        ApplyConstantThrust();
         ApplyInertiaAndFriction();
     }
 
-    private void BoostUncontrollably() {
-        currentVelocity += transform.forward * forwardThrust * Time.deltaTime;
+    private void ApplyConstantThrust() {
+        currentVelocity += transform.forward * constantThrust * Time.deltaTime;
     }
 
     private void ApplyInertiaAndFriction() {
@@ -61,7 +64,14 @@ public class SixDofShipController : MonoBehaviour, IShipController, IEngineEffec
         currentRotationSpeed *= inertiaRetain;
     }
 
+    public void ApplyForwardThrust(float thrust) {
+        currentVelocity += transform.forward * forwardBoost * thrust * Time.deltaTime;
+        ObjectManager.Instance.CockpitEffects.AddCockpitShake(0.032f * thrust);
+    }
+
+
     public void ApplyLateralThrust(Vector2 thrust) {
+        activeAccelNormalized = thrust;
         currentRotationSpeed.x += thrust.y * pitchPower * Time.deltaTime;
         currentRotationSpeed.y += thrust.x * yawPower * Time.deltaTime;
     }
