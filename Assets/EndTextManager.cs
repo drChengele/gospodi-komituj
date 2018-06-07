@@ -6,11 +6,9 @@ using UnityEngine.UI;
 public class EndTextManager : MonoBehaviour {
 
     public Text won;
-
     public Text lost;
-
-    public bool gameWon = GameManager.IsSuccessGameOver;
-
+    public Text stats;
+    
     private void Awake()
     {
         DisplayText();
@@ -18,16 +16,12 @@ public class EndTextManager : MonoBehaviour {
 
     public void DisplayText()
     {
-        if (gameWon)
-        {
-            won.gameObject.SetActive(true);
-            lost.gameObject.SetActive(false);
-        }
-        else
-        {
-            lost.gameObject.SetActive(true);
-            won.gameObject.SetActive(false);
-        }
+        stats.text =  $"Distance travelled : {GameManager.GlobalData.MetersCrossed} kliks"
+                    + $"\nBounty accrued: {GameManager.GlobalData.Bounty}$$"
+                    + "\nPress enter to continue";
+
+        won.gameObject.SetActive(GameManager.GlobalData.IsGameOverAVictory);
+        lost.gameObject.SetActive(!GameManager.GlobalData.IsGameOverAVictory);
     }
 
 }

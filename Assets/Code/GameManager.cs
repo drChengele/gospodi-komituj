@@ -31,15 +31,19 @@ public class GameManager : MonoBehaviour {
             functionalPanels[UnityEngine.Random.Range(0, functionalPanels.Length)].ChangeDamageState(DamageState.Malfunction);
     }
 
-    static public bool IsSuccessGameOver { get; set; }
+    static public class GlobalData {
+        static public bool IsGameOverAVictory { get; set; }
+        static public float Bounty { get; set; }
+        static public float MetersCrossed { get; set; }
+    }
 
+    
     public void GameOver(bool success) {
-        IsSuccessGameOver = success;
+        GlobalData.IsGameOverAVictory = success;
         UnityEngine.SceneManagement.SceneManager.LoadScene(2);
     }
 
     internal void AsteroidWasHitByBullet(Bullet bullet, GameObject asteroid) {
-        Debug.Log("ASTEROID HIT BY BULLIT");
         Instantiate(ObjectManager.Instance.Prefabs.particles_asteroidExplosion, bullet.transform.position, Quaternion.identity);
         asteroid.SetActive(false);
         bullet.DieSoon();

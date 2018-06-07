@@ -27,7 +27,6 @@ public class CanisterGenerator : MonoBehaviour, IObjectGenerator {
     HashSet<GameObject> maintainedObjects = new HashSet<GameObject>();
 
     void GenerateCanisterPair() {
-        Debug.Log("Generating canisters");
         var yOffset = UnityEngine.Random.Range(-1f, 1f) * transversalOffset;
         var xOffset = UnityEngine.Random.Range(-1f, 1f) * transversalOffset;
         var worldCoords = solipsist.transform.position + new Vector3(xOffset, yOffset, distanceOfSpawn);

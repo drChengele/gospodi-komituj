@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,21 +22,29 @@ public class ShipMilageManager : MonoBehaviour {
         if (jamShipController == null) return;
         if (!goalReached)
         {
-            if (Mileage < goalMileage) Mileage += jamShipController.forwardSpeed * Time.deltaTime;
-            else
-            {
+            Mileage += jamShipController.forwardSpeed * Time.deltaTime;
+
+            UpdateStats();
+
+            if (Mileage >= goalMileage) {
                 Mileage = goalMileage;
                 goalReached = true;
                 ResolveGoalReached();
+                Destroy(this); // ensure it only triggers once.
             }
         }
 	}
+
+    void UpdateStats() {
+        GameManager.GlobalData.MetersCrossed = (int)Mileage;
+        GameManager.GlobalData.Bounty = 13 * (int)Mileage;
+    }
 
     public float remaining => goalMileage - Mileage;
 
     void ResolveGoalReached()
     {
-        GameManager.IsSuccessGameOver = true;
+        GameManager.GlobalData.IsGameOverAVictory = true;
         UnityEngine.SceneManagement.SceneManager.LoadScene(2);
     }
 }
