@@ -8,7 +8,11 @@ public interface IInertiaProvider {
     float   CurrentRollSpeed { get; }
 }
 
-public class JamShipController : MonoBehaviour, IEngineEffector, IInertiaProvider {
+public interface IShipController {
+    GameObject GameObject { get; }
+}
+
+public class JamShipController : MonoBehaviour, IShipController, IEngineEffector, IInertiaProvider {
     public ShipSystems systems;
 
     [Range(2f, 60f)]
@@ -24,6 +28,8 @@ public class JamShipController : MonoBehaviour, IEngineEffector, IInertiaProvide
 
     [Range(0.92f, 0.999f)]
     public float inertiaRetain;
+
+    public GameObject GameObject => gameObject;
 
     public Vector3 CurrentVelocity => currentVelocity;
     public Vector3 CurrentAccelerationRelative => activeAcceleration;
@@ -52,13 +58,17 @@ public class JamShipController : MonoBehaviour, IEngineEffector, IInertiaProvide
         //currentRoll *= inertiaRetain;
     }
 
-    public void ApplyThrust(Vector2 thrust) {
+    public void ApplyLateralThrust(Vector2 thrust) {
         activeAccelNormalized = thrust;
         activeAcceleration = thrust * this.thrustPower;
 
         var transformedVector = transform.TransformVector(activeAcceleration); // take rotation into account
 
         currentVelocity += transformedVector * Time.fixedDeltaTime;
+    }
+
+    public void ApplyForwardThrust(float thrust) {
+        // do nothing, we go forward all the time baby
     }
 
     void ApplyVelocity() {

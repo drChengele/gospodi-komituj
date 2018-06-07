@@ -1,13 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ManageButtons : MonoBehaviour
 {
 
     public void StartGame()
     {
-        Application.LoadLevel(3);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+    }
+
+    public void StartExplorationGame() {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(4);
     }
 
     public void QuitGame()

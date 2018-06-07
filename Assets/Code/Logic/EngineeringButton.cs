@@ -6,29 +6,37 @@ public class EngineeringButton : MonoBehaviour, IEngineerInteractible {
     [SerializeField] WutDuzDisBUttonDo buttonFunction;
 
     [SerializeField] float rechargeEnergyRate;
+
+    [SerializeField] Transform visualMesh;
     //[SerializeField] float rechargeHeatRate;
 
-    float initialZ;
-    float targetZ;
+    [SerializeField] Vector3 buttonPressDelta;
+
+    bool isDepressed;
+    Color inactiveColor;
+    Color activatedColor;
 
     void Awake() {
-        var rememberedZ = transform.localPosition.z;
+        activatedColor = visualMesh.GetComponent<MeshRenderer>().material.GetColor("_EmissionColor");
+        inactiveColor = activatedColor;
+        inactiveColor.r *= 0.3f; inactiveColor.g *= 0.3f; inactiveColor.b *= 0.3f;        
     }
 
     void LateUpdate() {
-        var pos = transform.localPosition;
-        pos.z = targetZ;
-        transform.localPosition = pos;
-        targetZ = initialZ;
-        // update depressio:
+        var target = isDepressed ? buttonPressDelta : Vector3.zero;
+        visualMesh.localPosition = Vector3.MoveTowards(visualMesh.localPosition, target, 0.6f * Time.deltaTime);
+        SetEmissionIntensity(visualMesh.GetComponent<MeshRenderer>(), isDepressed ? 3 : 0.1f);
+        isDepressed = false; // reset, onholdcontinued will set it to true if necessary
     }
 
+    void SetEmissionIntensity(MeshRenderer renderer, float newIntensity) {
+        renderer.material.SetColor("_EmissionColor", isDepressed ? activatedColor : inactiveColor);
+    }
 
     public void OnHoldContinued() {
-        targetZ = -0.0977f;
+        isDepressed = true;
         switch (buttonFunction)
         {
-
             //ObjectManager.Instance
 
             case WutDuzDisBUttonDo.ChargeShields:

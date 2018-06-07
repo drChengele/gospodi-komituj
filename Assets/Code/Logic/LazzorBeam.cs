@@ -32,7 +32,7 @@ public class LazzorBeam : ShipSystem {
         cooldownLeft = 1f / fireRate;
         //sp.gameObject.GetComponent<WeaponSounds>().PlayPewPew();
 
-        ObjectManager.Instance.CockpitEffects.AddCockpitShake(0.6f);
+        ObjectManager.Instance.CockpitEffects.AddCockpitShake(2f);
     }
 
     private void CreateBullet(Transform spawnPoint) {

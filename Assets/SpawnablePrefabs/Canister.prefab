@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23043371419719556}
   - component: {fileID: 65913375709831890}
   - component: {fileID: 114949097052754702}
+  - component: {fileID: 114433637028636438}
   m_Layer: 22
   m_Name: Canister
   m_TagString: Canister
@@ -58,7 +59,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 036f0feffca9b864baeae31709fc6a79, type: 2}
+  - {fileID: 2100000, guid: 19022fb29720f934a9da6cb550dad5b1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,6 +98,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114433637028636438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1916489915785880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5deca87072d064288ca9008afbb916, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kind: 1
 --- !u!114 &114949097052754702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -109,3 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wireType: 0
+  lightIntensity: 1.6

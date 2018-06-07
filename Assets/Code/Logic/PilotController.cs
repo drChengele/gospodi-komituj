@@ -6,6 +6,7 @@ public class PilotController : MonoBehaviour {
     internal float rollSignal;
     internal bool    fireSignal;
     internal bool    shieldSignal;
+    internal float forwardSignal;
 
     private void Update() {
         thrusterSignal = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -13,5 +14,6 @@ public class PilotController : MonoBehaviour {
         if (thrusterSignal.magnitude > 1f) thrusterSignal.Normalize();
         fireSignal = Input.GetButton("Fire");
         shieldSignal = Input.GetButton("Shield");
+        forwardSignal = Input.GetAxis("Forward");
     }
 }

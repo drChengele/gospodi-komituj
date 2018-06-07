@@ -10,6 +10,6 @@ public class PrefabContainer : MonoBehaviour {
     [SerializeField] public GameObject particles_sparksLoop;
     [SerializeField] public GameObject particles_sparksRepairing;
     [SerializeField] public GameObject particles_wireSparking;
-    [SerializeField] public GameObject uiTriangle;
+    [SerializeField] public GameObject radarImage;
 
 }

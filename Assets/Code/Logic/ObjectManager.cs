@@ -6,7 +6,7 @@ public interface IObjectManager {
     Camera EngineeringCamera { get; }
     Camera PilotCamera { get; }
     Camera WorldCamera { get; }
-    JamShipController ShipController { get; }
+    IShipController ShipController { get; }
     PilotController PilotController { get; }
     ShipSystems ShipSystems { get;  }
     GameManager GameManager { get; }
@@ -21,7 +21,7 @@ public interface IObjectManager {
 
 public class ObjectManager : MonoBehaviour, IObjectManager {
 
-    [SerializeField] JamShipController shipController;
+    [SerializeField] GameObject shipController;
     [SerializeField] PilotController pilotController;
     [SerializeField] Camera engineeringCamera;
     [SerializeField] Camera cockpitCamera;
@@ -36,8 +36,8 @@ public class ObjectManager : MonoBehaviour, IObjectManager {
     [SerializeField] PrefabContainer prefabs;
     [SerializeField] CockpitController cockpitController;
 
-    public IInertiaProvider InertiaSource => shipController;
-    public JamShipController ShipController => shipController;
+    public IInertiaProvider InertiaSource => shipController.GetComponent<IInertiaProvider>();
+    public IShipController ShipController => shipController.GetComponent<IShipController>();
     public PilotController PilotController => pilotController;
     public Camera EngineeringCamera => engineeringCamera;
     public Camera PilotCamera => cockpitCamera;
@@ -56,12 +56,6 @@ public class ObjectManager : MonoBehaviour, IObjectManager {
     public static IObjectManager Instance { get; private set; }
 
     void Awake() {
-        Instance = this;
-        FindReferences();
+        Instance = this;     
     }
-
-    private void FindReferences() {
-        if (shipController == null) shipController = FindObjectOfType<JamShipController>();
-    }
-
 }

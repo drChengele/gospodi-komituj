@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Canister : MonoBehaviour {
     public WireType wireType;
+    public float lightIntensity;
+    [SerializeField] MeshRenderer meshRenderer;
+    [SerializeField] int materialID;
 
     private void Awake() {
         wireType = Utility.GetRandomWire();
@@ -10,8 +13,12 @@ public class Canister : MonoBehaviour {
     }
 
     private void UpdateMaterialColor() {
-        var material = GetComponent<MeshRenderer>().material;
-        material.color = GetColorFromWire(wireType);
+        var materials = meshRenderer.materials;
+        var color = GetColorFromWire(wireType);
+        var material = materials[materialID];
+        material.SetColor("_EmissionColor", color * lightIntensity);
+        meshRenderer.materials = materials;
+
     }
 
     Color GetColorFromWire(WireType wire) {
@@ -32,5 +39,11 @@ static public partial class Utility {
         if (diceRoll == 2) return WireType.Orange;
         if (diceRoll == 3) return WireType.Purple;
         return WireType.Purple;
+    }
+
+    static public float ProjectNumbers(float fromMin, float fromMax, float toMin, float toMax, float value, bool clamp = true) {
+        var t = Mathf.InverseLerp(fromMin, fromMax, value);
+        if (clamp) t = Mathf.Clamp01(t);
+        return Mathf.Lerp(toMin, toMax, t);
     }
 }

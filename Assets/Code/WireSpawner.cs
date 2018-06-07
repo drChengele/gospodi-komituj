@@ -7,8 +7,9 @@ public class WireSpawner : MonoBehaviour {
     [SerializeField] Material[] materials;
     [SerializeField] Transform wireParent;
     [SerializeField] GameObject wire;
-    [SerializeField] Transform spawnOrigin;
     [SerializeField] Animator klapna;
+
+    [SerializeField] float wireSpawnInterval;
 
     [SerializeField] public GameObject wirePrefabInSituFull;
     [SerializeField] public GameObject wirePrefabInSituMalfunction;
@@ -18,11 +19,36 @@ public class WireSpawner : MonoBehaviour {
         return materials[(int)type];
     }
 
-    public void SpawnWire(WireType wType)
-    {
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.F9)) {
+            EnqueueWireSpawn(Utility.GetRandomWire());
+        }
+
+        ProcessQueue();
+    }
+
+    IEnumerator WireSpawnCoroutine(WireType type) {
+        var go = (GameObject)Instantiate(wire, transform.position, Quaternion.identity, wireParent);
+        go.GetComponent<WireBehaviour>().SetWireType(type);
         klapna.SetTrigger("Open");
-        var go = (GameObject)Instantiate(wire, spawnOrigin.position, Quaternion.identity, wireParent);
-        go.GetComponent<WireBehaviour>().wType = wType;
-        go.GetComponent<MeshRenderer>().material = GetMaterialFor(wType);
+        yield return new WaitForSeconds(0.6f);
+        go.GetComponent<WireSpawnAnimator>().StartAnimation();
+    }
+
+    float timeToNextWire;
+
+    void ProcessQueue() {
+        timeToNextWire -= Time.deltaTime; if (timeToNextWire > 0f) return;
+        if (wiresToSpawn.Count == 0) return;
+
+        StartCoroutine(WireSpawnCoroutine(wiresToSpawn.Dequeue()));
+
+        timeToNextWire = wireSpawnInterval;
+    }
+
+    Queue<WireType> wiresToSpawn = new Queue<WireType>();
+
+    public void EnqueueWireSpawn(WireType wire) {
+        wiresToSpawn.Enqueue(wire);
     }
 }

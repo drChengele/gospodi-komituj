@@ -4,9 +4,15 @@ using System.Linq;
 using UnityEngine;
 
 
-public class ObjectGenerator : MonoBehaviour {
+public interface IObjectGenerator {
+    event Action<GameObject> ObjectGenerated;
+}
+
+public class ObjectGenerator : MonoBehaviour, IObjectGenerator {
 
     private HashSet<GameObject> maintainedObjects = new HashSet<GameObject>();
+
+    public event Action<GameObject> ObjectGenerated;
 
     // by definition, generation is on the Z axis
      
@@ -35,7 +41,7 @@ public class ObjectGenerator : MonoBehaviour {
 
     int slicesTilCanister = 0;
 
-    private void Awake() {
+    private void Start() {
         FirstGeneration();
     }
 
@@ -63,6 +69,7 @@ public class ObjectGenerator : MonoBehaviour {
 
     private void SpawnCanisters(float atZ) {
 
+        Debug.Log($"Spawning canisters at z {atZ}");
         var yOffset = UnityEngine.Random.Range(-1f, 1f) * canisterSpawnRadius;
         var xOffset = UnityEngine.Random.Range(-1f, 1f) * canisterSpawnRadius;
         var worldCoords = solipsist.transform.position + new Vector3(xOffset, yOffset, atZ);
@@ -73,7 +80,9 @@ public class ObjectGenerator : MonoBehaviour {
             var firstCanisterInstance = Instantiate(canisterPrefab);
             firstCanisterInstance.transform.position = worldCoords + offset * i;
             maintainedObjects.Add(firstCanisterInstance);
+            ObjectGenerated?.Invoke(firstCanisterInstance);
         }
+        
      
     }
 
@@ -98,6 +107,8 @@ public class ObjectGenerator : MonoBehaviour {
             var item = createWhat[UnityEngine.Random.Range(0, createWhat.Length)];
             EnqueueSpawnObject(new ObjectSpawnInfo(item, UnityEngine.Random.Range(zStart, zEnd)));
         }
+
+        Debug.Log($"Object generator objects generated: {numToSpawn}");
 
         maxGeneratedDepth = zEnd;
     }
@@ -157,6 +168,7 @@ public class ObjectGenerator : MonoBehaviour {
         spawnedObject.transform.position = info.coords;
         spawnedObject.transform.localScale *= UnityEngine.Random.Range(1f - scaleVariance, 1f + scaleVariance);
         spawnedObject.transform.localRotation = Utility.GetRandomRotation();
+        ObjectGenerated?.Invoke(spawnedObject);
         maintainedObjects.Add(spawnedObject);
     }
 }
